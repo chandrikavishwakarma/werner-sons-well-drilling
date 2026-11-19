@@ -32,12 +32,12 @@ export default function Logo({
           <linearGradient id="iconGold" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stop-color="#FFF6D4"/>
             <stop offset="30%" stop-color="#ECD07B"/>
-            <stop offset="70%" stop-color="#D5AA54"/>
+            <stop offset="70%" stop-color="#D4A338"/>
             <stop offset="100%" stop-color="#8F641B"/>
           </linearGradient>
           <linearGradient id="iconForest" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stop-color="#245A4C"/>
-            <stop offset="50%" stop-color="#173F35"/>
+            <stop offset="50%" stop-color="#133A2E"/>
             <stop offset="100%" stop-color="#0D2620"/>
           </linearGradient>
           <linearGradient id="iconCyan" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -48,11 +48,11 @@ export default function Logo({
         </defs>
 
         <circle cx="32" cy="32" r="30" fill="url(#iconForest)" stroke="url(#iconGold)" strokeWidth="2.4"/>
-        <circle cx="32" cy="32" r="26.5" fill="none" stroke="#D5AA54" strokeWidth="0.7" strokeDasharray="2.5 1.5" opacity="0.65"/>
+        <circle cx="32" cy="32" r="26.5" fill="none" stroke="#D4A338" strokeWidth="0.7" strokeDasharray="2.5 1.5" opacity="0.65"/>
 
         {/* Aquifer Strata */}
         <path d="M 14 44 Q 32 50 50 44" stroke="#3DC3DF" strokeWidth="1.8" strokeLinecap="round" opacity="0.75"/>
-        <path d="M 17 48 Q 32 53 47 48" stroke="#D5AA54" strokeWidth="1.3" strokeLinecap="round" opacity="0.55"/>
+        <path d="M 17 48 Q 32 53 47 48" stroke="#D4A338" strokeWidth="1.3" strokeLinecap="round" opacity="0.55"/>
 
         {/* Derrick W Monogram */}
         <polygon points="15,17 20,17 24,42 19,42" fill="url(#iconGold)"/>
@@ -91,14 +91,14 @@ export default function Logo({
           <linearGradient id="stkGold" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stop-color="#FFF6D4"/>
             <stop offset="20%" stop-color="#ECD07B"/>
-            <stop offset="55%" stop-color="#D5AA54"/>
+            <stop offset="55%" stop-color="#D4A338"/>
             <stop offset="85%" stop-color="#B38631"/>
             <stop offset="100%" stop-color="#8F641B"/>
           </linearGradient>
 
           <linearGradient id="stkForest" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stop-color="#225447"/>
-            <stop offset="45%" stop-color="#173F35"/>
+            <stop offset="45%" stop-color="#133A2E"/>
             <stop offset="100%" stop-color="#0D2620"/>
           </linearGradient>
 
@@ -129,10 +129,10 @@ export default function Logo({
         {/* Top Medallion Emblem */}
         <g filter="url(#stkElevated)">
           <circle cx="270" cy="46" r="38" fill="url(#stkForest)" stroke="url(#stkGold)" strokeWidth="2.8"/>
-          <circle cx="270" cy="46" r="34" fill="none" stroke="#D5AA54" strokeWidth="0.75" strokeDasharray="3 1.5" opacity="0.65"/>
+          <circle cx="270" cy="46" r="34" fill="none" stroke="#D4A338" strokeWidth="0.75" strokeDasharray="3 1.5" opacity="0.65"/>
 
           <path d="M 244 62 Q 270 69 296 62" stroke="#3DC3DF" strokeWidth="2" strokeLinecap="round" opacity="0.75"/>
-          <path d="M 249 67 Q 270 73 291 67" stroke="#D5AA54" strokeWidth="1.4" strokeLinecap="round" opacity="0.55"/>
+          <path d="M 249 67 Q 270 73 291 67" stroke="#D4A338" strokeWidth="1.4" strokeLinecap="round" opacity="0.55"/>
 
           <polygon points="245,26 252,26 258,60 251,60" fill="url(#stkGold)"/>
           <polygon points="295,26 288,26 282,60 289,60" fill="url(#stkGold)"/>
@@ -236,7 +236,7 @@ export default function Logo({
         <linearGradient id={`${gradPrefix}Gold`} x1="0%" y1="0%" x2="0%" y2="100%">
           <stop offset="0%" stop-color="#FFF6D4"/>
           <stop offset="25%" stop-color="#ECD07B"/>
-          <stop offset="60%" stop-color="#D5AA54"/>
+          <stop offset="60%" stop-color="#D4A338"/>
           <stop offset="100%" stop-color="#8F641B"/>
         </linearGradient>
 
@@ -267,10 +267,10 @@ export default function Logo({
       {/* Left Monogram Medallion */}
       <g transform="translate(6, 6)" filter={`url(#${gradPrefix}Shadow)`}>
         <circle cx="32" cy="32" r="30" fill={`url(#${gradPrefix}Forest)`} stroke={`url(#${gradPrefix}Gold)`} strokeWidth="2.4"/>
-        <circle cx="32" cy="32" r="26.5" fill="none" stroke="#D5AA54" strokeWidth="0.7" strokeDasharray="2.5 1.5" opacity={isDark ? "0.75" : "0.65"}/>
+        <circle cx="32" cy="32" r="26.5" fill="none" stroke="#D4A338" strokeWidth="0.7" strokeDasharray="2.5 1.5" opacity={isDark ? "0.75" : "0.65"}/>
 
         <path d="M 14 44 Q 32 50 50 44" stroke="#3DC3DF" strokeWidth="1.8" strokeLinecap="round" opacity="0.75"/>
-        <path d="M 17 48 Q 32 53 47 48" stroke="#D5AA54" strokeWidth="1.3" strokeLinecap="round" opacity="0.55"/>
+        <path d="M 17 48 Q 32 53 47 48" stroke="#D4A338" strokeWidth="1.3" strokeLinecap="round" opacity="0.55"/>
 
         <polygon points="15,17 20,17 24,42 19,42" fill={`url(#${gradPrefix}Gold)`}/>
         <polygon points="49,17 44,17 40,42 45,42" fill={`url(#${gradPrefix}Gold)`}/>
@@ -297,7 +297,7 @@ export default function Logo({
           fontSize="34"
           fontWeight="900"
           letterSpacing="2.5"
-          fill={isDark ? "#FFFFFF" : "#173F35"}
+          fill={isDark ? "#FFFFFF" : "#133A2E"}
         >
           WERNER
         </text>

@@ -38,7 +38,7 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="bg-[#173F35] text-white border-t border-[#173F35]/40 pt-16 pb-12 relative">
+      <footer className="bg-[#133A2E] text-white border-t border-[#133A2E]/40 pt-16 pb-12 relative">
         <div className="container-custom">
           {/* 4-Column Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-12 border-b border-white/10">
@@ -46,7 +46,7 @@ export default function Footer() {
             <div className="lg:col-span-4 flex flex-col items-start text-left">
               <Link
                 to="/"
-                className="inline-block mb-5 transition-transform hover:scale-[1.01] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D5AA54] rounded cursor-pointer"
+                className="inline-block mb-5 transition-transform hover:scale-[1.01] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A338] rounded cursor-pointer"
                 aria-label="Werner & Sons Well Drilling LLC Home"
               >
                 <Logo
@@ -60,15 +60,15 @@ export default function Footer() {
                 Werner &amp; Sons Well Drilling LLC is an established, family-owned-and-operated water well drilling contractor based in Easton, Pennsylvania. For more than 50 years, our team has delivered prompt, reliable, and neat water drilling solutions with traditional cable tool workmanship.
               </p>
 
-              <div className="flex items-center gap-2 text-xs text-[#D5AA54] font-medium bg-white/5 px-3 py-2 rounded-lg border border-white/10">
-                <ShieldCheck className="w-4 h-4 text-[#D5AA54] shrink-0" />
+              <div className="flex items-center gap-2 text-xs text-[#D4A338] font-medium bg-white/5 px-3 py-2 rounded-lg border border-white/10">
+                <ShieldCheck className="w-4 h-4 text-[#D4A338] shrink-0" />
                 <span>We Accept Cash &amp; Personal Checks &bull; Free Estimates</span>
               </div>
             </div>
 
             {/* Col 2: Quick Links (2 cols) */}
             <div className="lg:col-span-2 text-left">
-              <h4 className="heading-serif text-base font-bold text-white mb-4 pb-2 border-b border-white/10">
+              <h4 className="heading-serif text-xl font-normal text-white mb-4 pb-2 border-b border-white/10">
                 Quick Links
               </h4>
               <ul className="space-y-2.5 text-sm text-white/80">
@@ -76,9 +76,9 @@ export default function Footer() {
                   <li key={item.label}>
                     <Link
                       to={item.path}
-                      className="hover:text-[#D5AA54] hover-underline-animation transition-colors flex items-center gap-1.5 cursor-pointer py-0.5"
+                      className="hover:text-[#D4A338] hover-underline-animation transition-colors flex items-center gap-1.5 cursor-pointer py-0.5"
                     >
-                      <ArrowRight className="w-3 h-3 text-[#D5AA54]/60 shrink-0" />
+                      <ArrowRight className="w-3 h-3 text-[#D4A338]/60 shrink-0" />
                       <span>{item.label}</span>
                     </Link>
                   </li>
@@ -88,7 +88,7 @@ export default function Footer() {
 
             {/* Col 3: Services (3 cols) */}
             <div className="lg:col-span-3 text-left">
-              <h4 className="heading-serif text-base font-bold text-white mb-4 pb-2 border-b border-white/10">
+              <h4 className="heading-serif text-xl font-normal text-white mb-4 pb-2 border-b border-white/10">
                 Our Services
               </h4>
               <ul className="space-y-2.5 text-sm text-white/80">
@@ -96,9 +96,9 @@ export default function Footer() {
                   <li key={item.label}>
                     <Link
                       to={item.path}
-                      className="hover:text-[#D5AA54] hover-underline-animation transition-colors flex items-center gap-1.5 cursor-pointer py-0.5"
+                      className="hover:text-[#D4A338] hover-underline-animation transition-colors flex items-center gap-1.5 cursor-pointer py-0.5"
                     >
-                      <ArrowRight className="w-3 h-3 text-[#D5AA54]/60 shrink-0" />
+                      <ArrowRight className="w-3 h-3 text-[#D4A338]/60 shrink-0" />
                       <span>{item.label}</span>
                     </Link>
                   </li>
@@ -108,17 +108,17 @@ export default function Footer() {
 
             {/* Col 4: Verified Contact Info (3 cols) */}
             <div className="lg:col-span-3 text-left">
-              <h4 className="heading-serif text-base font-bold text-white mb-4 pb-2 border-b border-white/10">
+              <h4 className="heading-serif text-xl font-normal text-white mb-4 pb-2 border-b border-white/10">
                 Contact Information
               </h4>
               <div className="space-y-3.5 text-sm text-white/85">
                 <div className="flex items-start gap-3">
-                  <Phone className="w-4 h-4 text-[#D5AA54] shrink-0 mt-1" />
+                  <Phone className="w-4 h-4 text-[#D4A338] shrink-0 mt-1" />
                   <div>
-                    <p className="text-xs uppercase text-white/60 font-semibold">Phone (24/7 Answered)</p>
+                    <p className="text-xs uppercase text-white/60 font-mono font-medium tracking-wider">Phone (24/7 Answered)</p>
                     <a
                       href="tel:6102585615"
-                      className="text-white font-bold hover:text-[#D5AA54] hover:underline transition-colors cursor-pointer"
+                      className="text-white font-bold hover:text-[#D4A338] hover:underline transition-colors cursor-pointer"
                     >
                       (610) 258-5615
                     </a>
@@ -126,12 +126,12 @@ export default function Footer() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Mail className="w-4 h-4 text-[#D5AA54] shrink-0 mt-1" />
+                  <Mail className="w-4 h-4 text-[#D4A338] shrink-0 mt-1" />
                   <div>
-                    <p className="text-xs uppercase text-white/60 font-semibold">Email Address</p>
+                    <p className="text-xs uppercase text-white/60 font-mono font-medium tracking-wider">Email Address</p>
                     <a
                       href="mailto:wernerandsons@yahoo.com"
-                      className="text-white hover:text-[#D5AA54] hover:underline transition-colors break-all cursor-pointer"
+                      className="text-white hover:text-[#D4A338] hover:underline transition-colors break-all cursor-pointer"
                     >
                       wernerandsons@yahoo.com
                     </a>
@@ -139,9 +139,9 @@ export default function Footer() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <MapPin className="w-4 h-4 text-[#D5AA54] shrink-0 mt-1" />
+                  <MapPin className="w-4 h-4 text-[#D4A338] shrink-0 mt-1" />
                   <div>
-                    <p className="text-xs uppercase text-white/60 font-semibold">Location &amp; Service Area</p>
+                    <p className="text-xs uppercase text-white/60 font-mono font-medium tracking-wider">Location &amp; Service Area</p>
                     <p className="text-white">Easton, PA 18040 &bull; PA 18042-9493</p>
                     <p className="text-xs text-white/70 mt-0.5">
                       Northampton, Lehigh, Monroe, Carbon &amp; Poconos
@@ -150,9 +150,9 @@ export default function Footer() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Clock className="w-4 h-4 text-[#D5AA54] shrink-0 mt-1" />
+                  <Clock className="w-4 h-4 text-[#D4A338] shrink-0 mt-1" />
                   <div>
-                    <p className="text-xs uppercase text-white/60 font-semibold">Hours of Operation</p>
+                    <p className="text-xs uppercase text-white/60 font-mono font-medium tracking-wider">Hours of Operation</p>
                     <p className="text-white font-medium">24-Hour Emergency Service</p>
                     <p className="text-xs text-white/70">Phones Answered 24 Hours a Day</p>
                   </div>
@@ -165,7 +165,7 @@ export default function Footer() {
                   href="http://www.facebook.com/share.php?u=http://www.wernerandsonswelldrilling.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-xs font-semibold text-[#D5AA54] hover:text-white transition-colors cursor-pointer group"
+                  className="inline-flex items-center gap-2 text-xs font-semibold text-[#D4A338] hover:text-white transition-colors cursor-pointer group"
                 >
                   <Share2 className="w-3.5 h-3.5 transition-transform group-hover:scale-110" />
                   <span>Like Werner &amp; Sons on Facebook</span>
@@ -184,7 +184,7 @@ export default function Footer() {
             <button
               type="button"
               onClick={scrollToTop}
-              className="inline-flex items-center gap-1.5 text-white/70 hover:text-[#D5AA54] transition-colors cursor-pointer group"
+              className="inline-flex items-center gap-1.5 text-white/70 hover:text-[#D4A338] transition-colors cursor-pointer group"
             >
               <span>Back to top</span>
               <ChevronUp className="w-4 h-4 transition-transform group-hover:-translate-y-1" />
@@ -203,7 +203,7 @@ export default function Footer() {
           type="button"
           onClick={scrollToTop}
           aria-label="Scroll back to top of page"
-          className="fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full bg-[#173F35] hover:bg-[#102F28] text-[#D5AA54] hover:text-white border border-[#D5AA54]/40 shadow-xl flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl cursor-pointer active:scale-95 animate-fade-in focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D5AA54]"
+          className="fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full bg-[#133A2E] hover:bg-[#0B241C] text-[#D4A338] hover:text-white border border-[#D4A338]/40 shadow-xl flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl cursor-pointer active:scale-95 animate-fade-in focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A338]"
         >
           <ChevronUp className="w-5 h-5" />
         </button>

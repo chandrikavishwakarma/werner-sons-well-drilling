@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import {
   ShieldCheck,
   Clock,
@@ -6,6 +6,8 @@ import {
   Layers,
   MapPin,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   CheckCircle2,
   Sparkles,
   Phone,
@@ -29,8 +31,58 @@ import cardPumpImg from '../assets/gallery/pump-installation/pump-1.jpg'
 import showcaseDrillImg from '../assets/gallery/well-drilling/drilling-2.jpg'
 import aboutTeamImg from '../assets/gallery/about-us/about-1.jpg'
 
+const rotatingPhrases = [
+  'pure, natural groundwater',
+  'lasting well performance',
+  '24/7 emergency reliability',
+  '50+ years of local trust',
+]
+
 export default function MainContent() {
   const [openFaq, setOpenFaq] = useState(null)
+  const [phraseIndex, setPhraseIndex] = useState(0)
+  const [isPhraseTransitioning, setIsPhraseTransitioning] = useState(false)
+  const [isHovered, setIsHovered] = useState(false)
+  const transitionTimeoutRef = useRef(null)
+  const timerRef = useRef(null)
+
+  const changePhrase = useCallback((newIndex) => {
+    if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current)
+    setIsPhraseTransitioning(true)
+    transitionTimeoutRef.current = setTimeout(() => {
+      setPhraseIndex(newIndex)
+      setIsPhraseTransitioning(false)
+    }, 220)
+  }, [])
+
+  const handlePrev = useCallback(() => {
+    const nextIdx = (phraseIndex - 1 + rotatingPhrases.length) % rotatingPhrases.length
+    changePhrase(nextIdx)
+  }, [phraseIndex, changePhrase])
+
+  const handleNext = useCallback(() => {
+    const nextIdx = (phraseIndex + 1) % rotatingPhrases.length
+    changePhrase(nextIdx)
+  }, [phraseIndex, changePhrase])
+
+  // Smoothly cycle through rotating phrases every 4.5s (pauses on hover and reduced motion)
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    if (mediaQuery.matches || isHovered) return
+
+    timerRef.current = setInterval(() => {
+      setIsPhraseTransitioning(true)
+      transitionTimeoutRef.current = setTimeout(() => {
+        setPhraseIndex((prev) => (prev + 1) % rotatingPhrases.length)
+        setIsPhraseTransitioning(false)
+      }, 220)
+    }, 4500)
+
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current)
+      if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current)
+    }
+  }, [isHovered, phraseIndex])
 
   // Scroll reveal hooks for progressive entrance
   const [statsRef, statsRevealed] = useScrollReveal({ threshold: 0.15 })
@@ -78,62 +130,62 @@ export default function MainContent() {
   ]
 
   return (
-    <div className="bg-[#F7F7F2]">
+    <div className="bg-[#F8FAFC]">
       {/* SECTION 4: Company Trust / Genuine Statistics Bar */}
-      <section ref={statsRef} className="bg-white border-y border-[#E3E8E3] py-8 sm:py-10">
+      <section ref={statsRef} className="bg-white border-y border-[#E2E8F0] py-8 sm:py-10">
         <div className="container-custom">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-center">
             {/* Stat 1: 50+ Years */}
-            <div className={`flex flex-col items-center p-4 rounded-xl bg-[#F7F7F2]/60 border border-[#E3E8E3]/60 card-hover reveal-on-scroll ${statsRevealed ? 'is-revealed' : ''}`}>
-              <div className="w-12 h-12 rounded-full bg-[#EAF0E9] flex items-center justify-center text-[#2D6654] mb-2.5 transition-transform hover:scale-110">
-                <ShieldCheck className="w-6 h-6 text-[#2D6654]" />
+            <div className={`flex flex-col items-center p-4 rounded-xl bg-[#F8FAFC]/60 border border-[#E2E8F0]/60 card-hover reveal-on-scroll ${statsRevealed ? 'is-revealed' : ''}`}>
+              <div className="w-12 h-12 rounded-full bg-[#F1F5F9] flex items-center justify-center text-[#0284C7] mb-2.5 transition-transform hover:scale-110">
+                <ShieldCheck className="w-6 h-6 text-[#0284C7]" />
               </div>
-              <span className="text-2xl sm:text-3xl font-bold text-[#173F35] heading-serif">
+              <span className="text-3xl sm:text-4xl font-normal text-[#133A2E] heading-serif">
                 <Counter end={50} suffix="+" /> Years
               </span>
-              <span className="text-xs sm:text-sm text-[#64706A] mt-0.5">Family-Owned Business</span>
+              <span className="text-xs sm:text-sm text-[#475569] mt-0.5">Family-Owned Business</span>
             </div>
 
             {/* Stat 2: 24/7 Service */}
             <div
-              className={`flex flex-col items-center p-4 rounded-xl bg-[#F7F7F2]/60 border border-[#E3E8E3]/60 card-hover reveal-on-scroll ${statsRevealed ? 'is-revealed' : ''}`}
+              className={`flex flex-col items-center p-4 rounded-xl bg-[#F8FAFC]/60 border border-[#E2E8F0]/60 card-hover reveal-on-scroll ${statsRevealed ? 'is-revealed' : ''}`}
               style={{ transitionDelay: '100ms' }}
             >
-              <div className="w-12 h-12 rounded-full bg-[#EAF0E9] flex items-center justify-center text-[#2D6654] mb-2.5 transition-transform hover:scale-110">
-                <Clock className="w-6 h-6 text-[#2D6654]" />
+              <div className="w-12 h-12 rounded-full bg-[#F1F5F9] flex items-center justify-center text-[#0284C7] mb-2.5 transition-transform hover:scale-110">
+                <Clock className="w-6 h-6 text-[#0284C7]" />
               </div>
-              <span className="text-2xl sm:text-3xl font-bold text-[#173F35] heading-serif">
+              <span className="text-3xl sm:text-4xl font-normal text-[#133A2E] heading-serif">
                 <Counter end={24} suffix="/7" />
               </span>
-              <span className="text-xs sm:text-sm text-[#64706A] mt-0.5">Emergency Phones Answered</span>
+              <span className="text-xs sm:text-sm text-[#475569] mt-0.5">Emergency Phones Answered</span>
             </div>
 
             {/* Stat 3: 4 Core Counties */}
             <div
-              className={`flex flex-col items-center p-4 rounded-xl bg-[#F7F7F2]/60 border border-[#E3E8E3]/60 card-hover reveal-on-scroll ${statsRevealed ? 'is-revealed' : ''}`}
+              className={`flex flex-col items-center p-4 rounded-xl bg-[#F8FAFC]/60 border border-[#E2E8F0]/60 card-hover reveal-on-scroll ${statsRevealed ? 'is-revealed' : ''}`}
               style={{ transitionDelay: '200ms' }}
             >
-              <div className="w-12 h-12 rounded-full bg-[#EAF0E9] flex items-center justify-center text-[#2D6654] mb-2.5 transition-transform hover:scale-110">
-                <MapPin className="w-6 h-6 text-[#2D6654]" />
+              <div className="w-12 h-12 rounded-full bg-[#F1F5F9] flex items-center justify-center text-[#0284C7] mb-2.5 transition-transform hover:scale-110">
+                <MapPin className="w-6 h-6 text-[#0284C7]" />
               </div>
-              <span className="text-2xl sm:text-3xl font-bold text-[#173F35] heading-serif">
+              <span className="text-3xl sm:text-4xl font-normal text-[#133A2E] heading-serif">
                 <Counter end={4} /> Core Counties
               </span>
-              <span className="text-xs sm:text-sm text-[#64706A] mt-0.5">Northampton, Lehigh, Monroe, Carbon</span>
+              <span className="text-xs sm:text-sm text-[#475569] mt-0.5">Northampton, Lehigh, Monroe, Carbon</span>
             </div>
 
             {/* Stat 4: 100% Cable Tool Percussion */}
             <div
-              className={`flex flex-col items-center p-4 rounded-xl bg-[#F7F7F2]/60 border border-[#E3E8E3]/60 card-hover reveal-on-scroll ${statsRevealed ? 'is-revealed' : ''}`}
+              className={`flex flex-col items-center p-4 rounded-xl bg-[#F8FAFC]/60 border border-[#E2E8F0]/60 card-hover reveal-on-scroll ${statsRevealed ? 'is-revealed' : ''}`}
               style={{ transitionDelay: '300ms' }}
             >
-              <div className="w-12 h-12 rounded-full bg-[#EAF0E9] flex items-center justify-center text-[#2D6654] mb-2.5 transition-transform hover:scale-110">
-                <Layers className="w-6 h-6 text-[#2D6654]" />
+              <div className="w-12 h-12 rounded-full bg-[#F1F5F9] flex items-center justify-center text-[#0284C7] mb-2.5 transition-transform hover:scale-110">
+                <Layers className="w-6 h-6 text-[#0284C7]" />
               </div>
-              <span className="text-2xl sm:text-3xl font-bold text-[#173F35] heading-serif">
+              <span className="text-3xl sm:text-4xl font-normal text-[#133A2E] heading-serif">
                 <Counter end={100} suffix="%" /> Cable Tool
               </span>
-              <span className="text-xs sm:text-sm text-[#64706A] mt-0.5">Gentle Aquifer Preservation</span>
+              <span className="text-xs sm:text-sm text-[#475569] mt-0.5">Gentle Aquifer Preservation</span>
             </div>
           </div>
         </div>
@@ -205,6 +257,53 @@ export default function MainContent() {
               />
             </div>
           </div>
+
+          {/* Clean, Animated Rotating Phrase Highlight Block with Nav Arrows directly below the 4 Service Cards */}
+          <div
+            className={`max-w-3xl mx-auto mt-10 sm:mt-12 text-center px-4 reveal-on-scroll ${
+              servicesRevealed ? 'is-revealed' : ''
+            }`}
+            style={{ transitionDelay: '480ms' }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-5">
+              {/* Previous Arrow Button */}
+              <button
+                type="button"
+                onClick={handlePrev}
+                aria-label="Previous highlight"
+                className="w-8 h-8 rounded-full border border-[#133A2E]/20 text-[#133A2E] hover:bg-[#133A2E] hover:text-white transition-all duration-200 cursor-pointer flex items-center justify-center shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#133A2E] active:scale-95"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+
+              {/* Highlight Sentence with Clean Inline Rotating Phrase */}
+              <p className="text-base sm:text-lg md:text-xl text-[#475569] leading-relaxed font-normal min-w-0">
+                Built for{' '}
+                <span
+                  className={`inline-block text-[#133A2E] font-bold transition-all duration-700 ease-out rotating-phrase-highlight ${
+                    isPhraseTransitioning
+                      ? 'opacity-0 translate-y-2'
+                      : 'opacity-100 translate-y-0'
+                  }`}
+                >
+                  {rotatingPhrases[phraseIndex]}
+                </span>{' '}
+                across residential, commercial, and industrial properties.
+              </p>
+
+              {/* Next Arrow Button */}
+              <button
+                type="button"
+                onClick={handleNext}
+                aria-label="Next highlight"
+                className="w-8 h-8 rounded-full border border-[#133A2E]/20 text-[#133A2E] hover:bg-[#133A2E] hover:text-white transition-all duration-200 cursor-pointer flex items-center justify-center shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#133A2E] active:scale-95"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -212,55 +311,55 @@ export default function MainContent() {
       <section
         id="why-us"
         ref={cableToolRef}
-        className={`py-16 sm:py-20 bg-white border-y border-[#E3E8E3] reveal-on-scroll ${
+        className={`py-16 sm:py-20 bg-white border-y border-[#E2E8F0] reveal-on-scroll ${
           cableToolRevealed ? 'is-revealed' : ''
         }`}
       >
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-6">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#D5AA54]/15 text-[#173F35] border border-[#D5AA54]/30 mb-3">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium uppercase tracking-widest bg-[#D4A338]/15 text-[#133A2E] border border-[#D4A338]/30 mb-3">
                 The Werner Difference
               </span>
-              <h2 className="heading-serif text-2xl sm:text-3xl md:text-4xl font-bold text-[#173F35] tracking-tight leading-tight mb-4">
-                Why Drill Your Well the Old-Fashioned Way?
+              <h2 className="heading-serif text-3xl sm:text-4xl md:text-5xl font-normal text-[#133A2E] tracking-tight leading-tight mb-4">
+                Why Drill Your Well the <span className="italic">Old-Fashioned Way?</span>
               </h2>
-              <p className="text-base sm:text-lg text-[#64706A] leading-relaxed mb-6">
+              <p className="text-base sm:text-lg text-[#475569] leading-relaxed mb-6">
                 In an era of rushed air drilling, Werner &amp; Sons remains committed to the proven, clean cable tool method. Your water well is a decades-long investment, and how it is drilled directly affects the depth, water quality, and maintenance frequency for years to come.
               </p>
 
               <div className="space-y-4">
                 <div className="flex items-start gap-3.5">
-                  <div className="w-7 h-7 rounded-full bg-[#173F35] text-white flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold">
+                  <div className="w-7 h-7 rounded-full bg-[#133A2E] text-white flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold">
                     1
                   </div>
                   <div>
-                    <h4 className="text-base font-bold text-[#173F35]">Charged by the Foot, Not by the Hour</h4>
-                    <p className="text-sm text-[#64706A] mt-0.5">
+                    <h4 className="text-base font-bold text-[#133A2E]">Charged by the Foot, Not by the Hour</h4>
+                    <p className="text-sm text-[#475569] mt-0.5">
                       You are charged for the actual depth needed, not hurried drilling time. Cable tool drilling allows natural fissures to open cleanly.
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3.5">
-                  <div className="w-7 h-7 rounded-full bg-[#173F35] text-white flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold">
+                  <div className="w-7 h-7 rounded-full bg-[#133A2E] text-white flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold">
                     2
                   </div>
                   <div>
-                    <h4 className="text-base font-bold text-[#173F35]">No High-Pressure Shock or Rock Fracturing</h4>
-                    <p className="text-sm text-[#64706A] mt-0.5">
+                    <h4 className="text-base font-bold text-[#133A2E]">No High-Pressure Shock or Rock Fracturing</h4>
+                    <p className="text-sm text-[#475569] mt-0.5">
                       High-pressure air can traumatize and collapse delicate underground aquifers. Cable tool drilling preserves surrounding geological formations.
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3.5">
-                  <div className="w-7 h-7 rounded-full bg-[#173F35] text-white flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold">
+                  <div className="w-7 h-7 rounded-full bg-[#133A2E] text-white flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold">
                     3
                   </div>
                   <div>
-                    <h4 className="text-base font-bold text-[#173F35]">Nothing Artificial Is Added</h4>
-                    <p className="text-sm text-[#64706A] mt-0.5">
+                    <h4 className="text-base font-bold text-[#133A2E]">Nothing Artificial Is Added</h4>
+                    <p className="text-sm text-[#475569] mt-0.5">
                       Only natural water is used during drilling. No synthetic drilling foams, chemical muds, or leaking compressor oils ever enter your water supply.
                     </p>
                   </div>
@@ -278,14 +377,14 @@ export default function MainContent() {
             </div>
 
             <div className="lg:col-span-6">
-              <div className="relative rounded-2xl overflow-hidden border border-[#E3E8E3] shadow-md bg-[#F7F7F2] p-3 sm:p-4 card-hover">
+              <div className="relative rounded-2xl overflow-hidden border border-[#E2E8F0] shadow-md bg-[#F8FAFC] p-3 sm:p-4 card-hover">
                 {/* Subtle Industry-Related Cable Tool Depth Indicator Graphic */}
-                <div className="absolute top-6 right-6 z-10 hidden sm:flex items-center gap-2 bg-[#173F35]/90 backdrop-blur-md px-3 py-1.5 rounded-full border border-[#D5AA54]/30 text-white shadow-lg">
+                <div className="absolute top-6 right-6 z-10 hidden sm:flex items-center gap-2 bg-[#133A2E]/90 backdrop-blur-md px-3 py-1.5 rounded-full border border-[#D4A338]/30 text-white shadow-lg">
                   <div className="relative w-2 h-4 flex flex-col items-center justify-between">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#D5AA54] animate-drilling-pulse" />
-                    <span className="w-0.5 h-full bg-[#D5AA54]/40" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#D4A338] animate-drilling-pulse" />
+                    <span className="w-0.5 h-full bg-[#D4A338]/40" />
                   </div>
-                  <span className="text-[11px] font-bold text-[#D5AA54] uppercase tracking-wider">
+                  <span className="text-xs font-mono font-medium text-[#D4A338] uppercase tracking-widest">
                     Cable Tool Percussion
                   </span>
                 </div>
@@ -299,11 +398,11 @@ export default function MainContent() {
                   />
                 </div>
                 <div className="p-4 text-left">
-                  <p className="text-xs font-bold uppercase tracking-wider text-[#D5AA54]">Authentic Workmanship</p>
-                  <p className="text-sm font-semibold text-[#173F35] mt-1">
+                  <p className="text-xs font-mono font-medium uppercase tracking-widest text-[#D4A338]">Authentic Workmanship</p>
+                  <p className="text-sm font-semibold text-[#133A2E] mt-1">
                     Borehole Drilling Operation &bull; Easton, Pennsylvania Site
                   </p>
-                  <p className="text-xs text-[#64706A] mt-1">
+                  <p className="text-xs text-[#475569] mt-1">
                     Careful property setup ensuring tidy lawns, protected soil, and pure water delivery.
                   </p>
                 </div>
@@ -317,7 +416,7 @@ export default function MainContent() {
       <section
         id="about-us"
         ref={aboutRef}
-        className={`py-16 sm:py-24 bg-[#EAF0E9]/50 border-y border-[#E3E8E3] reveal-on-scroll ${
+        className={`py-16 sm:py-24 bg-[#F1F5F9]/50 border-y border-[#E2E8F0] reveal-on-scroll ${
           aboutRevealed ? 'is-revealed' : ''
         }`}
       >
@@ -325,7 +424,7 @@ export default function MainContent() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             {/* Left: Authentic Company Photograph */}
             <div className="lg:col-span-5 order-2 lg:order-1">
-              <div className="relative rounded-2xl overflow-hidden border border-[#E3E8E3] shadow-md bg-white p-2">
+              <div className="relative rounded-2xl overflow-hidden border border-[#E2E8F0] shadow-md bg-white p-2">
                 <div className="aspect-[4/3] rounded-xl overflow-hidden bg-neutral-100">
                   <img
                     src={aboutTeamImg}
@@ -335,11 +434,11 @@ export default function MainContent() {
                   />
                 </div>
                 <div className="p-4 bg-white">
-                  <div className="flex items-center gap-2 text-xs font-bold text-[#173F35]">
-                    <Sparkles className="w-4 h-4 text-[#D5AA54]" />
+                  <div className="flex items-center gap-2 text-xs font-bold text-[#133A2E]">
+                    <Sparkles className="w-4 h-4 text-[#D4A338]" />
                     <span>Family-Owned &amp; Operated for 50+ Years</span>
                   </div>
-                  <p className="text-xs text-[#64706A] mt-1">
+                  <p className="text-xs text-[#475569] mt-1">
                     Easton, PA &bull; Prompt response &bull; Dependable results
                   </p>
                 </div>
@@ -355,9 +454,9 @@ export default function MainContent() {
                 className="mb-6"
               />
 
-              <div className="space-y-4 text-base sm:text-lg text-[#64706A] leading-relaxed">
+              <div className="space-y-4 text-base sm:text-lg text-[#475569] leading-relaxed">
                 <p>
-                  <strong className="text-[#173F35]">Werner &amp; Sons Well Drilling LLC</strong> is a water drilling contractor in Easton, Pennsylvania, that uses the good, old-fashioned water well drilling equipment when you need to tap into a fresh water source.
+                  <strong className="text-[#133A2E]">Werner &amp; Sons Well Drilling LLC</strong> is a water drilling contractor in Easton, Pennsylvania, that uses the good, old-fashioned water well drilling equipment when you need to tap into a fresh water source.
                 </p>
                 <p>
                   Our team ensures that every job is done efficiently, quickly, and without a mess. We take pride in our fleet of equipment and in creating as little impact as we can on your property and landscaping.
@@ -368,14 +467,14 @@ export default function MainContent() {
               </div>
 
               <div className="mt-8 flex flex-wrap gap-4 items-center">
-                <Button to="/estimate-request" variant="primary" size="md">
+                <Button to="/estimate-request" variant="primary" size="md" glow={true}>
                   Request a Free Estimate
                 </Button>
                 <a
                   href="tel:6102585615"
-                  className="inline-flex items-center gap-2 text-sm font-bold text-[#173F35] hover:text-[#2D6654]"
+                  className="inline-flex items-center gap-2 text-sm font-bold text-[#133A2E] hover:text-[#0284C7]"
                 >
-                  <Phone className="w-4 h-4 text-[#D5AA54]" />
+                  <Phone className="w-4 h-4 text-[#D4A338]" />
                   <span>Call (610) 258-5615</span>
                 </a>
               </div>
@@ -385,15 +484,15 @@ export default function MainContent() {
       </section>
 
       {/* SECTION 8: Homepage Gallery Section (MANDATORY MINIMUM 6 PHOTOGRAPHS) */}
-      <section className="py-16 sm:py-20 bg-white border-y border-[#E3E8E3]">
+      <section className="py-16 sm:py-20 bg-white border-y border-[#E2E8F0]">
         <div className="container-custom">
           <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-4 mb-10">
             <div>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#173F35]/10 text-[#173F35] mb-2">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium uppercase tracking-widest bg-[#133A2E]/10 text-[#133A2E] mb-2">
                 Field Operations Showcase (6 Photos)
               </span>
-              <h2 className="heading-serif text-2xl sm:text-3xl md:text-4xl font-bold text-[#173F35]">
-                Recent Field Projects &amp; Equipment
+              <h2 className="heading-serif text-3xl sm:text-4xl md:text-5xl font-normal text-[#133A2E] tracking-tight leading-tight">
+                Recent Field Projects &amp; <span className="italic">Equipment</span>
               </h2>
             </div>
             <Button to="/gallery" variant="outline" size="md">
@@ -419,28 +518,28 @@ export default function MainContent() {
             {serviceAreas.map((area, idx) => (
               <div
                 key={idx}
-                className="bg-white rounded-2xl p-6 border border-[#E3E8E3] shadow-xs card-hover flex flex-col justify-between text-left"
+                className="bg-white rounded-2xl p-6 border border-[#E2E8F0] shadow-xs card-hover flex flex-col justify-between text-left"
               >
                 <div>
-                  <div className="flex items-center gap-2 text-[#173F35] mb-2 font-bold text-lg heading-serif">
-                    <MapPin className="w-5 h-5 text-[#D5AA54] shrink-0" />
+                  <div className="flex items-center gap-2 text-[#133A2E] mb-2 font-bold text-lg">
+                    <MapPin className="w-5 h-5 text-[#D4A338] shrink-0" />
                     <span>{area.name}</span>
                   </div>
-                  <p className="text-sm text-[#64706A] leading-relaxed">{area.desc}</p>
+                  <p className="text-sm text-[#475569] leading-relaxed">{area.desc}</p>
                 </div>
-                <div className="mt-4 pt-3 border-t border-[#E3E8E3] text-xs font-semibold text-[#2D6654]">
+                <div className="mt-4 pt-3 border-t border-[#E2E8F0] text-xs font-semibold text-[#0284C7]">
                   Full residential &amp; commercial service &bull; 24/7 Available
                 </div>
               </div>
             ))}
 
             {/* Easton Headquarters Card */}
-            <div className="bg-[#173F35] text-white rounded-2xl p-6 shadow-xs card-hover flex flex-col justify-between text-left">
+            <div className="bg-[#133A2E] text-white rounded-2xl p-6 shadow-xs card-hover flex flex-col justify-between text-left">
               <div>
-                <span className="text-xs uppercase font-bold text-[#D5AA54] tracking-widest">
+                <span className="text-xs font-mono font-medium uppercase text-[#D4A338] tracking-widest">
                   Home Office &amp; Operations
                 </span>
-                <h4 className="heading-serif text-xl font-bold text-white mt-1 mb-2">
+                <h4 className="heading-serif text-2xl font-normal text-white mt-1 mb-2">
                   Easton, PA 18040
                 </h4>
                 <p className="text-sm text-white/80 leading-relaxed">
@@ -450,7 +549,7 @@ export default function MainContent() {
               <div className="mt-4 pt-3 border-t border-white/15">
                 <a
                   href="tel:6102585615"
-                  className="text-xs font-bold text-[#D5AA54] hover:text-white flex items-center gap-1.5 cursor-pointer group"
+                  className="text-xs font-bold text-[#D4A338] hover:text-white flex items-center gap-1.5 cursor-pointer group"
                 >
                   <Phone className="w-3.5 h-3.5 transition-transform group-hover:scale-110" />
                   <span>Call (610) 258-5615</span>
@@ -462,15 +561,15 @@ export default function MainContent() {
       </section>
 
       {/* SECTION 10: Verified Company Standards / Commitments */}
-      <section className="py-14 bg-[#173F35] text-white">
+      <section className="py-14 bg-[#133A2E] text-white">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0 text-[#D5AA54]">
+              <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0 text-[#D4A338]">
                 <ShieldCheck className="w-6 h-6" />
               </div>
               <div>
-                <h4 className="heading-serif text-lg font-bold text-white mb-1">Stand Behind Our Work</h4>
+                <h4 className="heading-serif text-xl sm:text-2xl font-normal text-white mb-1">Stand Behind Our Work</h4>
                 <p className="text-sm text-white/80 leading-relaxed">
                   Every well and pump installation is backed by more than five decades of family ownership and genuine accountability.
                 </p>
@@ -478,11 +577,11 @@ export default function MainContent() {
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0 text-[#D5AA54]">
+              <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0 text-[#D4A338]">
                 <Clock className="w-6 h-6" />
               </div>
               <div>
-                <h4 className="heading-serif text-lg font-bold text-white mb-1">Prompt Response Time</h4>
+                <h4 className="heading-serif text-xl sm:text-2xl font-normal text-white mb-1">Prompt Response Time</h4>
                 <p className="text-sm text-white/80 leading-relaxed">
                   Phones answered 24 hours a day. We know that running out of water is an emergency that cannot wait until Monday.
                 </p>
@@ -490,11 +589,11 @@ export default function MainContent() {
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0 text-[#D5AA54]">
+              <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0 text-[#D4A338]">
                 <Wrench className="w-6 h-6" />
               </div>
               <div>
-                <h4 className="heading-serif text-lg font-bold text-white mb-1">Clean &amp; Minimal Impact</h4>
+                <h4 className="heading-serif text-xl sm:text-2xl font-normal text-white mb-1">Clean &amp; Minimal Impact</h4>
                 <p className="text-sm text-white/80 leading-relaxed">
                   We take pride in our well-maintained fleet and leaving your yard and driveway clean, neat, and without a mess.
                 </p>
@@ -505,7 +604,7 @@ export default function MainContent() {
       </section>
 
       {/* SECTION 11: Frequently Asked Questions */}
-      <section id="faq" className="py-16 sm:py-24 bg-white border-b border-[#E3E8E3]">
+      <section id="faq" className="py-16 sm:py-24 bg-white border-b border-[#E2E8F0]">
         <div className="container-custom max-w-4xl">
           <SectionHeading
             badge="Got Questions?"
@@ -518,27 +617,27 @@ export default function MainContent() {
               <div
                 key={index}
                 className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
-                  openFaq === index ? 'border-[#173F35] shadow-xs' : 'border-[#E3E8E3] hover:border-[#173F35]/40'
+                  openFaq === index ? 'border-[#133A2E] shadow-xs' : 'border-[#E2E8F0] hover:border-[#133A2E]/40'
                 }`}
               >
                 <button
                   type="button"
                   onClick={() => toggleFaq(index)}
-                  className="w-full flex items-center justify-between p-5 text-left bg-white hover:bg-[#F7F7F2] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#173F35] cursor-pointer"
+                  className="w-full flex items-center justify-between p-5 text-left bg-white hover:bg-[#F8FAFC] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#133A2E] cursor-pointer"
                   aria-expanded={openFaq === index}
                 >
-                  <span className="font-semibold text-base sm:text-lg text-[#173F35] pr-4">
+                  <span className="font-semibold text-base sm:text-lg text-[#133A2E] pr-4">
                     {faq.q}
                   </span>
                   <ChevronDown
-                    className={`w-5 h-5 text-[#2D6654] shrink-0 transition-transform duration-200 ${
-                      openFaq === index ? 'rotate-180 text-[#D5AA54]' : ''
+                    className={`w-5 h-5 text-[#0284C7] shrink-0 transition-transform duration-200 ${
+                      openFaq === index ? 'rotate-180 text-[#D4A338]' : ''
                     }`}
                   />
                 </button>
 
                 {openFaq === index && (
-                  <div className="px-5 pb-5 text-sm sm:text-base text-[#64706A] leading-relaxed border-t border-[#E3E8E3]/60 pt-3.5 bg-[#F7F7F2]/50 text-left animate-slide-down">
+                  <div className="px-5 pb-5 text-sm sm:text-base text-[#475569] leading-relaxed border-t border-[#E2E8F0]/60 pt-3.5 bg-[#F8FAFC]/50 text-left animate-slide-down">
                     {faq.a}
                   </div>
                 )}
@@ -549,42 +648,42 @@ export default function MainContent() {
       </section>
 
       {/* SECTION 12: Request an Estimate Section */}
-      <section id="estimate" className="py-16 sm:py-24 bg-[#F7F7F2]">
+      <section id="estimate" className="py-16 sm:py-24 bg-[#F8FAFC]">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             <div className="lg:col-span-5 text-left">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#173F35]/10 text-[#173F35] mb-3">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium uppercase tracking-widest bg-[#133A2E]/10 text-[#133A2E] mb-3">
                 Free Estimate Request
               </span>
-              <h2 className="heading-serif text-3xl sm:text-4xl font-bold text-[#173F35] leading-tight mb-4">
-                Ready to Tap into Clean, Reliable Water?
+              <h2 className="heading-serif text-3xl sm:text-4xl md:text-5xl font-normal text-[#133A2E] leading-tight mb-4">
+                Ready to Tap into Clean, <span className="italic">Reliable Water?</span>
               </h2>
-              <p className="text-base text-[#64706A] leading-relaxed mb-6">
+              <p className="text-base text-[#475569] leading-relaxed mb-6">
                 Fill out the estimate form, and our family team will review your project details and follow up promptly with honest advice and pricing.
               </p>
 
-              <div className="bg-white rounded-xl p-5 border border-[#E3E8E3] shadow-xs space-y-3 mb-6">
-                <div className="flex items-center gap-3 text-sm text-[#252D2A]">
-                  <Phone className="w-4 h-4 text-[#D5AA54] shrink-0" />
+              <div className="bg-white rounded-xl p-5 border border-[#E2E8F0] shadow-xs space-y-3 mb-6">
+                <div className="flex items-center gap-3 text-sm text-[#133A2E]">
+                  <Phone className="w-4 h-4 text-[#D4A338] shrink-0" />
                   <span>
                     Call 24/7:{' '}
-                    <a href="tel:6102585615" className="font-bold text-[#173F35] underline">
+                    <a href="tel:6102585615" className="font-bold text-[#133A2E] underline">
                       (610) 258-5615
                     </a>
                   </span>
                 </div>
-                <div className="flex items-center gap-3 text-sm text-[#252D2A]">
-                  <MapPin className="w-4 h-4 text-[#D5AA54] shrink-0" />
+                <div className="flex items-center gap-3 text-sm text-[#133A2E]">
+                  <MapPin className="w-4 h-4 text-[#D4A338] shrink-0" />
                   <span>Easton, PA &bull; Northampton, Lehigh, Monroe &amp; Carbon Counties</span>
                 </div>
-                <div className="flex items-center gap-3 text-sm text-[#252D2A]">
-                  <CheckCircle2 className="w-4 h-4 text-[#D5AA54] shrink-0" />
+                <div className="flex items-center gap-3 text-sm text-[#133A2E]">
+                  <CheckCircle2 className="w-4 h-4 text-[#D4A338] shrink-0" />
                   <span>Cash &amp; Personal Checks Accepted &bull; Free Estimates</span>
                 </div>
               </div>
 
-              <div className="p-4 rounded-xl bg-[#173F35] text-white">
-                <p className="text-xs uppercase font-bold text-[#D5AA54] tracking-wider">Emergency Pump Failure?</p>
+              <div className="p-4 rounded-xl bg-[#133A2E] text-white">
+                <p className="text-xs font-mono font-medium uppercase text-[#D4A338] tracking-widest">Emergency Pump Failure?</p>
                 <p className="text-sm text-white/90 mt-1">
                   Do not wait for form replies. Dial our emergency line directly at{' '}
                   <a href="tel:6102585615" className="font-bold underline text-white">

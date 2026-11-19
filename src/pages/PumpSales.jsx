@@ -17,7 +17,7 @@ export default function PumpSales() {
   }, [])
 
   return (
-    <div className="bg-[#F7F7F2]">
+    <div className="bg-[#F8FAFC]">
       {/* Modernized Full-Width Photography Hero Header */}
       <PageHero
         breadcrumbText="Pump Sales, Service & Installation"
@@ -39,61 +39,61 @@ export default function PumpSales() {
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             {/* Main Column (8 Cols) */}
-            <div className="lg:col-span-8 bg-white rounded-2xl border border-[#E3E8E3] p-6 sm:p-10 shadow-xs space-y-8 text-left">
+            <div className="lg:col-span-8 bg-white rounded-2xl border border-[#E2E8F0] p-6 sm:p-10 shadow-xs space-y-8 text-left">
               <div>
-                <h2 className="heading-serif text-2xl sm:text-3xl font-bold text-[#173F35] mb-3">
-                  Submersible Pump Sales &amp; Replacement
+                <h2 className="heading-serif text-3xl sm:text-4xl font-normal text-[#133A2E] mb-3">
+                  Submersible Pump Sales &amp; <span className="italic">Replacement</span>
                 </h2>
-                <p className="text-base sm:text-lg text-[#64706A] leading-relaxed">
-                  <strong className="text-[#173F35]">Werner &amp; Sons Well Drilling LLC</strong> provides sales and service for all residential, commercial, and agricultural water pump systems. You can call us anytime your pump stops working or fails to maintain adequate water pressure.
+                <p className="text-base sm:text-lg text-[#475569] leading-relaxed">
+                  <strong className="text-[#133A2E]">Werner &amp; Sons Well Drilling LLC</strong> provides sales and service for all residential, commercial, and agricultural water pump systems. You can call us anytime your pump stops working or fails to maintain adequate water pressure.
                 </p>
-                <p className="text-base sm:text-lg text-[#64706A] leading-relaxed mt-3">
-                  We specialize in the installation and replacement of <strong className="text-[#173F35]">J Class submersible pumps</strong>. Engineered for continuous deep-well service, high energy efficiency, and rugged durability, J-Class pumps provide dependable, smooth flow even in challenging groundwater conditions.
+                <p className="text-base sm:text-lg text-[#475569] leading-relaxed mt-3">
+                  We specialize in the installation and replacement of <strong className="text-[#133A2E]">J Class submersible pumps</strong>. Engineered for continuous deep-well service, high energy efficiency, and rugged durability, J-Class pumps provide dependable, smooth flow even in challenging groundwater conditions.
                 </p>
               </div>
 
               {/* Complete Pump Diagnostics & Service */}
-              <div className="border-t border-[#E3E8E3] pt-6">
-                <h3 className="heading-serif text-xl sm:text-2xl font-bold text-[#173F35] mb-3">
+              <div className="border-t border-[#E2E8F0] pt-6">
+                <h3 className="heading-serif text-2xl sm:text-3xl font-normal text-[#133A2E] mb-3">
                   Common Pump Issues We Fix Quickly
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="p-4 rounded-xl bg-[#EAF0E9]/50 border border-[#2D6654]/20 card-hover">
-                    <div className="flex items-center gap-2 text-[#173F35] font-bold text-base mb-1">
-                      <Zap className="w-4 h-4 text-[#D5AA54]" />
+                  <div className="p-4 rounded-xl bg-[#F1F5F9]/50 border border-[#0284C7]/20 card-hover">
+                    <div className="flex items-center gap-2 text-[#133A2E] font-bold text-base mb-1">
+                      <Zap className="w-4 h-4 text-[#D4A338]" />
                       <span>No Water at Faucets</span>
                     </div>
-                    <p className="text-xs text-[#64706A]">
+                    <p className="text-xs text-[#475569]">
                       Diagnosing electrical control boxes, faulty pressure switches, or burned-out submersible pump motors.
                     </p>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-[#EAF0E9]/50 border border-[#2D6654]/20 card-hover">
-                    <div className="flex items-center gap-2 text-[#173F35] font-bold text-base mb-1">
-                      <Clock className="w-4 h-4 text-[#D5AA54]" />
+                  <div className="p-4 rounded-xl bg-[#F1F5F9]/50 border border-[#0284C7]/20 card-hover">
+                    <div className="flex items-center gap-2 text-[#133A2E] font-bold text-base mb-1">
+                      <Clock className="w-4 h-4 text-[#D4A338]" />
                       <span>Pump Constantly Cycling</span>
                     </div>
-                    <p className="text-xs text-[#64706A]">
+                    <p className="text-xs text-[#475569]">
                       Repairing waterlogged pressure tanks, faulty check valves, or drop-pipe pinhole leaks deep in the well.
                     </p>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-[#EAF0E9]/50 border border-[#2D6654]/20 card-hover">
-                    <div className="flex items-center gap-2 text-[#173F35] font-bold text-base mb-1">
-                      <Wrench className="w-4 h-4 text-[#D5AA54]" />
+                  <div className="p-4 rounded-xl bg-[#F1F5F9]/50 border border-[#0284C7]/20 card-hover">
+                    <div className="flex items-center gap-2 text-[#133A2E] font-bold text-base mb-1">
+                      <Wrench className="w-4 h-4 text-[#D4A338]" />
                       <span>Low or Pulsing Water Pressure</span>
                     </div>
-                    <p className="text-xs text-[#64706A]">
+                    <p className="text-xs text-[#475569]">
                       Evaluating pump impeller wear, tank pre-charge pressures, and sediment obstructions.
                     </p>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-[#EAF0E9]/50 border border-[#2D6654]/20 card-hover">
-                    <div className="flex items-center gap-2 text-[#173F35] font-bold text-base mb-1">
-                      <Shield className="w-4 h-4 text-[#D5AA54]" />
+                  <div className="p-4 rounded-xl bg-[#F1F5F9]/50 border border-[#0284C7]/20 card-hover">
+                    <div className="flex items-center gap-2 text-[#133A2E] font-bold text-base mb-1">
+                      <Shield className="w-4 h-4 text-[#D4A338]" />
                       <span>Pressure Tank Replacement</span>
                     </div>
-                    <p className="text-xs text-[#64706A]">
+                    <p className="text-xs text-[#475569]">
                       Installing genuine Champion&reg; and WELL-X-TROL&reg; tanks that match your pump horsepower.
                     </p>
                   </div>
@@ -101,13 +101,13 @@ export default function PumpSales() {
               </div>
 
               {/* Emergency Service Banner */}
-              <div className="border-t border-[#E3E8E3] pt-6">
-                <div className="bg-[#173F35] text-white rounded-xl p-6">
-                  <div className="flex items-center gap-2 text-[#D5AA54] text-xs font-bold uppercase tracking-wider mb-2">
+              <div className="border-t border-[#E2E8F0] pt-6">
+                <div className="bg-[#133A2E] text-white rounded-xl p-6">
+                  <div className="flex items-center gap-2 text-[#D4A338] text-xs font-mono font-medium uppercase tracking-widest mb-2">
                     <Clock className="w-4 h-4" />
                     <span>24-Hour Emergency Response</span>
                   </div>
-                  <h4 className="heading-serif text-xl sm:text-2xl font-bold mb-2">
+                  <h4 className="heading-serif text-2xl sm:text-3xl font-normal mb-2">
                     Has Your Water Pump Stopped Working?
                   </h4>
                   <p className="text-sm text-white/80 leading-relaxed mb-5">
@@ -128,12 +128,12 @@ export default function PumpSales() {
               </div>
 
               {/* Estimate Callout */}
-              <div className="border-t border-[#E3E8E3] pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="border-t border-[#E2E8F0] pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>
-                  <h4 className="heading-serif text-lg font-bold text-[#173F35]">Looking for a New Pump or Tank?</h4>
-                  <p className="text-sm text-[#64706A]">Contact us today to request a free, upfront estimate.</p>
+                  <h4 className="heading-serif text-xl sm:text-2xl font-normal text-[#133A2E]">Looking for a New Pump or Tank?</h4>
+                  <p className="text-sm text-[#475569]">Contact us today to request a free, upfront estimate.</p>
                 </div>
-                <Button to="/estimate-request" variant="secondary" size="md">
+                <Button to="/estimate-request" variant="primary" size="md" glow={true}>
                   Request an Estimate
                 </Button>
               </div>
@@ -142,7 +142,7 @@ export default function PumpSales() {
             {/* Sidebar (4 Cols) */}
             <div className="lg:col-span-4 space-y-6">
               {/* Photo Card */}
-              <div className="bg-white rounded-2xl border border-[#E3E8E3] p-4 shadow-xs overflow-hidden text-left">
+              <div className="bg-white rounded-2xl border border-[#E2E8F0] p-4 shadow-xs overflow-hidden text-left">
                 <div className="aspect-[4/3] rounded-xl overflow-hidden bg-neutral-100 mb-3">
                   <img
                     src={featuredPumpImg}
@@ -150,47 +150,47 @@ export default function PumpSales() {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <p className="text-xs uppercase font-bold text-[#D5AA54] tracking-wider">Well Equipment</p>
-                <h4 className="heading-serif text-base font-bold text-[#173F35] mt-0.5">
+                <p className="text-xs uppercase font-mono font-medium text-[#D4A338] tracking-widest">Well Equipment</p>
+                <h4 className="heading-serif text-lg font-normal text-[#133A2E] mt-0.5">
                   Submersible Pump &amp; Tank Service
                 </h4>
-                <p className="text-xs text-[#64706A] mt-1">
+                <p className="text-xs text-[#475569] mt-1">
                   Professional equipment matched specifically to your well depth and household capacity.
                 </p>
               </div>
 
               {/* Specifications Box */}
-              <div className="bg-white rounded-2xl border border-[#E3E8E3] p-6 shadow-xs text-left">
-                <h4 className="heading-serif text-lg font-bold text-[#173F35] mb-3 flex items-center gap-2">
-                  <Wrench className="w-5 h-5 text-[#2D6654]" />
+              <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6 shadow-xs text-left">
+                <h4 className="heading-serif text-xl font-normal text-[#133A2E] mb-3 flex items-center gap-2">
+                  <Wrench className="w-5 h-5 text-[#0284C7]" />
                   <span>Equipment We Install</span>
                 </h4>
-                <ul className="space-y-2.5 text-xs text-[#64706A]">
+                <ul className="space-y-2.5 text-xs text-[#475569]">
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#D5AA54] shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-[#D4A338] shrink-0 mt-0.5" />
                     <span>J Class Submersible Water Well Pumps</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#D5AA54] shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-[#D4A338] shrink-0 mt-0.5" />
                     <span>Champion&reg; High-Pressure Water Tanks</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#D5AA54] shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-[#D4A338] shrink-0 mt-0.5" />
                     <span>WELL-X-TROL&reg; Pre-Pressurized Diaphragm Tanks</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#D5AA54] shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-[#D4A338] shrink-0 mt-0.5" />
                     <span>Heavy-Duty Submersible Drop Wire &amp; Safety Cables</span>
                   </li>
                 </ul>
               </div>
 
               {/* Emergency Call Box */}
-              <div className="bg-[#173F35] text-white rounded-2xl p-6 shadow-xs text-left">
-                <p className="text-xs uppercase font-bold text-[#D5AA54] tracking-widest mb-1">
+              <div className="bg-[#133A2E] text-white rounded-2xl p-6 shadow-xs text-left">
+                <p className="text-xs uppercase font-mono font-medium text-[#D4A338] tracking-widest mb-1">
                   Emergency Line
                 </p>
-                <h4 className="heading-serif text-xl font-bold mb-2">Pump Out of Order?</h4>
+                <h4 className="heading-serif text-2xl font-normal mb-2">Pump Out of Order?</h4>
                 <p className="text-xs text-white/80 mb-4 leading-relaxed">
                   Call Werner &amp; Sons immediately. We respond right away with replacement equipment ready to install.
                 </p>
@@ -210,7 +210,7 @@ export default function PumpSales() {
       </section>
 
       {/* DEDICATED SERVICE GALLERY SECTION (MANDATORY MINIMUM 6 PHOTOGRAPHS) */}
-      <section className="py-16 sm:py-20 bg-white border-y border-[#E3E8E3]">
+      <section className="py-16 sm:py-20 bg-white border-y border-[#E2E8F0]">
         <div className="container-custom">
           <SectionHeading
             badge="Equipment Photography (7 Photos)"
@@ -224,43 +224,43 @@ export default function PumpSales() {
       </section>
 
       {/* Related Services Navigation */}
-      <section className="py-12 bg-[#F7F7F2]">
+      <section className="py-12 bg-[#F8FAFC]">
         <div className="container-custom">
-          <h3 className="heading-serif text-xl font-bold text-[#173F35] mb-6 text-center">
+          <h3 className="heading-serif text-2xl sm:text-3xl font-normal text-[#133A2E] mb-6 text-center">
             Explore Related Well Services
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             <Link
               to="/well-drilling"
-              className="p-5 rounded-xl border border-[#E3E8E3] hover:border-[#173F35] hover:shadow-xs transition-all text-left group bg-white"
+              className="p-5 rounded-xl border border-[#E2E8F0] hover:border-[#133A2E] hover:shadow-xs transition-all text-left group bg-white"
             >
-              <h4 className="font-bold text-base text-[#173F35] group-hover:text-[#2D6654] flex items-center justify-between">
+              <h4 className="font-bold text-base text-[#133A2E] group-hover:text-[#0284C7] flex items-center justify-between">
                 <span>New Water Well Drilling</span>
-                <ArrowRight className="w-4 h-4 text-[#D5AA54]" />
+                <ArrowRight className="w-4 h-4 text-[#D4A338]" />
               </h4>
-              <p className="text-xs text-[#64706A] mt-1">Cable tool drilling for residential, commercial &amp; farms.</p>
+              <p className="text-xs text-[#475569] mt-1">Cable tool drilling for residential, commercial &amp; farms.</p>
             </Link>
 
             <Link
               to="/well-deepening"
-              className="p-5 rounded-xl border border-[#E3E8E3] hover:border-[#173F35] hover:shadow-xs transition-all text-left group bg-white"
+              className="p-5 rounded-xl border border-[#E2E8F0] hover:border-[#133A2E] hover:shadow-xs transition-all text-left group bg-white"
             >
-              <h4 className="font-bold text-base text-[#173F35] group-hover:text-[#2D6654] flex items-center justify-between">
+              <h4 className="font-bold text-base text-[#133A2E] group-hover:text-[#0284C7] flex items-center justify-between">
                 <span>Well Deepening &amp; Tanks</span>
-                <ArrowRight className="w-4 h-4 text-[#D5AA54]" />
+                <ArrowRight className="w-4 h-4 text-[#D4A338]" />
               </h4>
-              <p className="text-xs text-[#64706A] mt-1">Deepen existing wells and replace pressure tanks.</p>
+              <p className="text-xs text-[#475569] mt-1">Deepen existing wells and replace pressure tanks.</p>
             </Link>
 
             <Link
               to="/water-treatment-system"
-              className="p-5 rounded-xl border border-[#E3E8E3] hover:border-[#173F35] hover:shadow-xs transition-all text-left group bg-white"
+              className="p-5 rounded-xl border border-[#E2E8F0] hover:border-[#133A2E] hover:shadow-xs transition-all text-left group bg-white"
             >
-              <h4 className="font-bold text-base text-[#173F35] group-hover:text-[#2D6654] flex items-center justify-between">
+              <h4 className="font-bold text-base text-[#133A2E] group-hover:text-[#0284C7] flex items-center justify-between">
                 <span>Water Purification Systems</span>
-                <ArrowRight className="w-4 h-4 text-[#D5AA54]" />
+                <ArrowRight className="w-4 h-4 text-[#D4A338]" />
               </h4>
-              <p className="text-xs text-[#64706A] mt-1">ATS® systems to eliminate sulfur smell and minerals.</p>
+              <p className="text-xs text-[#475569] mt-1">ATS® systems to eliminate sulfur smell and minerals.</p>
             </Link>
           </div>
         </div>

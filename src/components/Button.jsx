@@ -12,36 +12,37 @@ export default function Button({
   disabled = false,
   icon: Icon,
   iconPosition = 'left',
+  glow = false,
   ...props
 }) {
   const baseStyles =
     'inline-flex items-center justify-center font-medium transition-all duration-200 ease-out cursor-pointer select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none active:translate-y-0 active:scale-[0.98]'
 
   const variants = {
-    // Primary: Forest green with hover lift and dark forest transition (#102F28)
+    // Primary: Architectural gold with deep forest green bold text
     primary:
-      'bg-[#173F35] hover:bg-[#102F28] text-white shadow-xs hover:shadow-md hover:-translate-y-0.5 focus-visible:ring-[#173F35] border border-transparent',
+      'bg-[#D4A338] hover:bg-[#C2922B] text-[#133A2E] font-bold shadow-xs hover:shadow-md hover:-translate-y-0.5 focus-visible:ring-[#D4A338] border border-[#C2922B]/30',
 
-    // Accent/Gold: Warm architectural gold for primary marketing CTAs
+    // Accent/Gold: Warm architectural gold for prominent CTAs
     accent:
-      'bg-[#D5AA54] hover:bg-[#C49942] text-[#173F35] font-bold shadow-xs hover:shadow-md hover:-translate-y-0.5 focus-visible:ring-[#D5AA54] border border-[#C49942]/30',
+      'bg-[#D4A338] hover:bg-[#C2922B] text-[#133A2E] font-bold shadow-xs hover:shadow-md hover:-translate-y-0.5 focus-visible:ring-[#D4A338] border border-[#C2922B]/30',
 
-    // Secondary: White background with forest green border and text, transitions to filled on hover
+    // Secondary: Pure white background with deep forest green border and text, filled on hover
     secondary:
-      'bg-white border-2 border-[#173F35] text-[#173F35] hover:bg-[#173F35] hover:text-white shadow-2xs hover:shadow-xs hover:-translate-y-0.5 focus-visible:ring-[#173F35]',
+      'bg-[#FFFFFF] border border-[#133A2E] text-[#133A2E] font-semibold hover:bg-[#133A2E] hover:text-[#FFFFFF] shadow-2xs hover:shadow-xs hover:-translate-y-0.5 focus-visible:ring-[#133A2E]',
 
     outline:
-      'bg-transparent border-2 border-[#173F35] text-[#173F35] hover:bg-[#173F35] hover:text-white shadow-2xs hover:shadow-xs hover:-translate-y-0.5 focus-visible:ring-[#173F35]',
+      'bg-transparent border border-[#133A2E] text-[#133A2E] font-semibold hover:bg-[#133A2E] hover:text-[#FFFFFF] shadow-2xs hover:shadow-xs hover:-translate-y-0.5 focus-visible:ring-[#133A2E]',
 
     outlineGold:
-      'bg-transparent border-2 border-[#D5AA54] text-[#D5AA54] hover:bg-[#D5AA54] hover:text-[#173F35] shadow-2xs hover:shadow-xs hover:-translate-y-0.5 focus-visible:ring-[#D5AA54]',
+      'bg-transparent border-2 border-[#D4A338] text-[#D4A338] hover:bg-[#D4A338] hover:text-[#133A2E] shadow-2xs hover:shadow-xs hover:-translate-y-0.5 focus-visible:ring-[#D4A338]',
 
     // White button: Clean card surface with soft hover tint
     white:
-      'bg-white text-[#173F35] hover:bg-[#F7F7F2] shadow-xs hover:shadow-md hover:-translate-y-0.5 focus-visible:ring-white border border-[#E3E8E3]',
+      'bg-[#FFFFFF] text-[#133A2E] font-semibold hover:bg-[#F8FAFC] shadow-xs hover:shadow-md hover:-translate-y-0.5 focus-visible:ring-[#133A2E] border border-[#E2E8F0]',
 
     ghost:
-      'bg-transparent text-[#173F35] hover:bg-[#173F35]/10 hover:-translate-y-0.5 focus-visible:ring-[#173F35]',
+      'bg-transparent text-[#133A2E] hover:bg-[#133A2E]/10 hover:-translate-y-0.5 focus-visible:ring-[#133A2E]',
   }
 
   const sizes = {
@@ -50,18 +51,67 @@ export default function Button({
     lg: 'text-base px-6 py-3.5 rounded-lg gap-2.5 font-semibold min-h-[48px]',
   }
 
-  const combinedClasses = `${baseStyles} ${variants[variant] || variants.primary} ${sizes[size] || sizes.md} ${className}`
-
   const iconElement = Icon && (
     <Icon className={`${size === 'sm' ? 'w-3.5 h-3.5' : size === 'lg' ? 'w-5 h-5' : 'w-4 h-4'} shrink-0`} />
   )
 
+  const renderInner = () => (
+    <>
+      {Icon && iconPosition === 'left' && iconElement}
+      <span>{children}</span>
+      {Icon && iconPosition === 'right' && iconElement}
+    </>
+  )
+
+  // Animated continuous light-yellow aura & shimmering border variant
+  if (glow) {
+    const glowWrapperClasses = `glow-shimmer-btn-wrapper ${className.includes('w-full') ? 'w-full' : ''} ${className}`
+    const innerClasses = `${baseStyles} bg-[#D4A338] hover:bg-[#C2922B] text-[#133A2E] font-bold ${sizes[size] || sizes.md} rounded-[11px] relative z-10 w-full`
+
+    if (to) {
+      return (
+        <div className={glowWrapperClasses}>
+          <div className="glow-shimmer-border" aria-hidden="true" />
+          <Link to={to} className={innerClasses} onClick={onClick} {...props}>
+            {renderInner()}
+          </Link>
+        </div>
+      )
+    }
+
+    if (href) {
+      return (
+        <div className={glowWrapperClasses}>
+          <div className="glow-shimmer-border" aria-hidden="true" />
+          <a href={href} className={innerClasses} onClick={onClick} {...props}>
+            {renderInner()}
+          </a>
+        </div>
+      )
+    }
+
+    return (
+      <div className={glowWrapperClasses}>
+        <div className="glow-shimmer-border" aria-hidden="true" />
+        <button
+          type={type}
+          disabled={disabled}
+          className={innerClasses}
+          onClick={onClick}
+          {...props}
+        >
+          {renderInner()}
+        </button>
+      </div>
+    )
+  }
+
+  const combinedClasses = `${baseStyles} ${variants[variant] || variants.primary} ${sizes[size] || sizes.md} ${className}`
+
   if (to) {
     return (
       <Link to={to} className={combinedClasses} onClick={onClick} {...props}>
-        {Icon && iconPosition === 'left' && iconElement}
-        <span>{children}</span>
-        {Icon && iconPosition === 'right' && iconElement}
+        {renderInner()}
       </Link>
     )
   }
@@ -69,9 +119,7 @@ export default function Button({
   if (href) {
     return (
       <a href={href} className={combinedClasses} onClick={onClick} {...props}>
-        {Icon && iconPosition === 'left' && iconElement}
-        <span>{children}</span>
-        {Icon && iconPosition === 'right' && iconElement}
+        {renderInner()}
       </a>
     )
   }
@@ -84,9 +132,7 @@ export default function Button({
       onClick={onClick}
       {...props}
     >
-      {Icon && iconPosition === 'left' && iconElement}
-      <span>{children}</span>
-      {Icon && iconPosition === 'right' && iconElement}
+      {renderInner()}
     </button>
   )
 }

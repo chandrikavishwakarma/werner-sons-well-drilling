@@ -30,7 +30,7 @@ export default function Navigation() {
                     className={({ isActive }) =>
                       `relative block px-3.5 py-2 text-xs lg:text-sm font-medium transition-all duration-200 rounded-md cursor-pointer select-none group ${
                         isActive
-                          ? 'text-[#D5AA54] font-bold bg-white/10 shadow-xs'
+                          ? 'text-[#D4A338] font-bold bg-white/10 shadow-xs'
                           : 'text-white/90 hover:text-white hover:bg-white/10'
                       }`
                     }
@@ -40,7 +40,7 @@ export default function Navigation() {
                         <span>{item.label}</span>
                         {/* Animated Underline Transition */}
                         <span
-                          className={`absolute bottom-1 left-3.5 right-3.5 h-[2px] bg-[#D5AA54] rounded-full transition-transform duration-300 origin-left ${
+                          className={`absolute bottom-1 left-3.5 right-3.5 h-[2px] bg-[#D4A338] rounded-full transition-transform duration-300 origin-left ${
                             isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
                           }`}
                         />
@@ -58,8 +58,8 @@ export default function Navigation() {
               className={({ isActive }) =>
                 `inline-flex items-center gap-1.5 px-4 py-2 text-xs lg:text-sm font-bold rounded-lg transition-all duration-200 cursor-pointer shadow-xs hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 ${
                   isActive
-                    ? 'bg-[#c49942] text-[#173F35] ring-2 ring-white/30'
-                    : 'bg-[#D5AA54] text-[#173F35] hover:bg-[#c49942]'
+                    ? 'bg-[#C2922B] text-[#133A2E] ring-2 ring-white/30'
+                    : 'bg-[#D4A338] text-[#133A2E] hover:bg-[#C2922B]'
                 }`
               }
             >

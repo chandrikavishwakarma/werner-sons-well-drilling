@@ -32,7 +32,7 @@ export default function Gallery() {
   }
 
   return (
-    <div className="bg-[#F7F7F2]">
+    <div className="bg-[#F8FAFC]">
       {/* Modernized Full-Width Photography Hero Header */}
       <PageHero
         breadcrumbText="Gallery"
@@ -61,16 +61,16 @@ export default function Gallery() {
                 onClick={() => setSelectedCategory(cat.value)}
                 className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 focus:outline-none flex items-center gap-2 cursor-pointer select-none active:scale-95 ${
                   selectedCategory === cat.value
-                    ? 'bg-[#173F35] text-white shadow-xs'
-                    : 'bg-white text-[#64706A] hover:bg-[#E3E8E3]/60 hover:text-[#173F35] border border-[#E3E8E3]'
+                    ? 'bg-[#133A2E] text-white shadow-xs'
+                    : 'bg-white text-[#475569] hover:bg-[#E2E8F0]/60 hover:text-[#133A2E] border border-[#E2E8F0]'
                 }`}
               >
                 <span>{cat.label}</span>
                 <span
                   className={`text-[11px] px-2 py-0.5 rounded-full font-bold transition-colors ${
                     selectedCategory === cat.value
-                      ? 'bg-[#D5AA54] text-[#173F35]'
-                      : 'bg-[#F7F7F2] text-[#64706A]'
+                      ? 'bg-[#D4A338] text-[#133A2E]'
+                      : 'bg-[#F8FAFC] text-[#475569]'
                   }`}
                 >
                   {cat.count}
@@ -80,9 +80,9 @@ export default function Gallery() {
           </div>
 
           {/* Active Category Description Note */}
-          <div className="text-center max-w-2xl mx-auto mb-10 text-xs sm:text-sm text-[#64706A]">
-            <p className="bg-white inline-block px-4 py-2 rounded-full border border-[#E3E8E3] shadow-2xs">
-              <span className="font-semibold text-[#173F35]">
+          <div className="text-center max-w-2xl mx-auto mb-10 text-xs sm:text-sm text-[#475569]">
+            <p className="bg-white inline-block px-4 py-2 rounded-full border border-[#E2E8F0] shadow-2xs">
+              <span className="font-semibold text-[#133A2E]">
                 {selectedCategory === 'All' ? 'Complete Portfolio' : selectedCategory}:
               </span>{' '}
               {categoryDescriptions[selectedCategory]}
@@ -96,21 +96,21 @@ export default function Gallery() {
           />
 
           {/* Authentic Footer Note */}
-          <div className="mt-16 rounded-2xl bg-white border border-[#E3E8E3] p-8 shadow-xs flex flex-col md:flex-row items-center justify-between gap-6 card-hover">
+          <div className="mt-16 rounded-2xl bg-white border border-[#E2E8F0] p-8 shadow-xs flex flex-col md:flex-row items-center justify-between gap-6 card-hover">
             <div className="text-left">
-              <span className="text-xs uppercase font-bold text-[#D5AA54] tracking-wider">
+              <span className="text-xs uppercase font-mono font-medium text-[#D4A338] tracking-widest">
                 Experience in Action
               </span>
-              <h3 className="heading-serif text-xl sm:text-2xl font-bold text-[#173F35] mt-1">
-                Have Questions About a Well Project?
+              <h3 className="heading-serif text-2xl sm:text-3xl font-normal text-[#133A2E] mt-1">
+                Have Questions About a <span className="italic">Well Project?</span>
               </h3>
-              <p className="text-sm text-[#64706A] mt-1 max-w-xl">
+              <p className="text-sm text-[#475569] mt-1 max-w-xl">
                 Contact our water drilling contractor in Easton, Pennsylvania for prompt, affordable well drilling and well deepening services.
               </p>
             </div>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
-              <Button to="/estimate-request" variant="primary" size="md">
+              <Button to="/estimate-request" variant="primary" size="md" glow={true}>
                 Request an Estimate
               </Button>
               <Button

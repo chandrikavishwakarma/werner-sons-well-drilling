@@ -1,21 +1,21 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #173f35;
-  --color-primary-dark: #102f28;
-  --color-secondary: #2d6654;
-  --color-accent: #d5aa54;
-  --color-accent-hover: #c49942;
-  --color-bg-main: #f7f7f2;
-  --color-bg-sage: #eaf0e9;
+  --color-primary: #133a2e;
+  --color-primary-dark: #0b241c;
+  --color-secondary: #0284c7;
+  --color-accent: #d4a338;
+  --color-accent-hover: #c2922b;
+  --color-bg-main: #f8fafc;
+  --color-bg-sage: #f1f5f9;
   --color-card: #ffffff;
-  --color-text-main: #252d2a;
-  --color-text-muted: #64706a;
-  --color-border-subtle: #e3e8e3;
+  --color-text-main: #133a2e;
+  --color-text-muted: #475569;
+  --color-border-subtle: #e2e8f0;
 
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-serif: 'Merriweather', Georgia, serif;
-  --font-display: 'Montserrat', sans-serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
 }
 
 /* Base typography & rendering */
@@ -34,7 +34,7 @@ body {
   padding: 0;
   font-family: var(--font-sans);
   background-color: var(--color-bg-main);
-  color: var(--color-text-main);
+  color: var(--color-text-muted);
   cursor: default;
 }
 
@@ -63,6 +63,8 @@ body {
 
 .heading-serif {
   font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.015em;
 }
 
 /* Interaction and Cursor Standards */
@@ -94,8 +96,8 @@ button:disabled, input:disabled, textarea:disabled, select:disabled {
 }
 .card-hover:hover {
   transform: translateY(-5px);
-  box-shadow: 0 14px 28px -6px rgba(23, 63, 53, 0.12), 0 6px 12px -2px rgba(23, 63, 53, 0.06);
-  border-color: rgba(45, 102, 84, 0.45);
+  box-shadow: 0 14px 28px -6px rgba(19, 58, 46, 0.10), 0 6px 12px -2px rgba(19, 58, 46, 0.05);
+  border-color: rgba(19, 58, 46, 0.30);
 }
 
 /* Smooth Animated Underline on Links */
@@ -123,22 +125,48 @@ button:disabled, input:disabled, textarea:disabled, select:disabled {
 /* Active Nav Link Indicator */
 .nav-link-active {
   position: relative;
-  color: #173f35 !important;
-  font-weight: 600;
+  color: #133a2e !important;
+  font-weight: 700;
 }
 .nav-link-active::after {
   content: '';
   position: absolute;
   width: 100%;
   transform: scaleX(1);
-  height: 2.5px;
-  bottom: -4px;
+  height: 2px;
+  bottom: -2px;
   left: 0;
-  background-color: #d5aa54;
+  background-color: #133a2e;
   border-radius: 2px;
 }
 
 /* Animated Keyframes */
+@keyframes heroCharReveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes heroWordReveal {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -213,6 +241,70 @@ button:disabled, input:disabled, textarea:disabled, select:disabled {
     transform: translateY(10px);
     opacity: 0.9;
   }
+}
+
+/* Continuous Light-Yellow / Gold Glow Breathing and Rotating Shimmer Border */
+@keyframes yellowAuraPulse {
+  0%, 100% {
+    box-shadow: 0 0 16px rgba(253, 224, 71, 0.65), 0 0 26px rgba(254, 240, 138, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(253, 224, 71, 0.90), 0 0 38px rgba(254, 240, 138, 0.55);
+  }
+}
+
+@keyframes spinBorder {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.glow-shimmer-btn-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  border-radius: 0.85rem;
+  overflow: hidden;
+  box-shadow: 0 0 18px rgba(253, 224, 71, 0.65);
+  animation: yellowAuraPulse 2.5s ease-in-out infinite;
+  transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  vertical-align: middle;
+}
+
+.glow-shimmer-btn-wrapper:hover {
+  box-shadow: 0 0 24px rgba(253, 224, 71, 0.90), 0 0 38px rgba(254, 240, 138, 0.65);
+  transform: translateY(-2px);
+}
+
+.glow-shimmer-btn-wrapper:active {
+  transform: scale(0.95);
+}
+
+.glow-shimmer-border {
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    #FEF08A 45deg,
+    #FDE047 90deg,
+    transparent 140deg,
+    transparent 180deg,
+    #FEF08A 225deg,
+    #FDE047 270deg,
+    transparent 320deg,
+    transparent 360deg
+  );
+  animation: spinBorder 3.5s linear infinite;
+  will-change: transform;
 }
 
 /* Continuous Marquee Keyframes for Announcement Bar */
@@ -296,6 +388,20 @@ button:disabled, input:disabled, textarea:disabled, select:disabled {
   }
 }
 
+.animate-char-reveal {
+  display: inline-block;
+  opacity: 0;
+  animation: heroCharReveal 450ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: transform, opacity, filter;
+}
+
+.animate-word-reveal {
+  display: inline-block;
+  opacity: 0;
+  animation: heroWordReveal 550ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: transform, opacity, filter;
+}
+
 .animate-fade-in {
   animation: fadeIn 250ms ease-out forwards;
 }
@@ -353,6 +459,23 @@ button:disabled, input:disabled, textarea:disabled, select:disabled {
     opacity: 1 !important;
     transform: none !important;
   }
+  .animate-char-reveal {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+  .animate-word-reveal {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+  .rotating-phrase-highlight {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
 }
 
 /* Custom Scrollbar */
@@ -361,12 +484,12 @@ button:disabled, input:disabled, textarea:disabled, select:disabled {
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #F7F7F2;
+  background: #F8FAFC;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2D6654;
+  background: #133A2E;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #173F35;
+  background: #0B241C;
 }

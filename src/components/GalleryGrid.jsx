@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { allMainGalleryPhotos } from '../data/galleryData'
 
 // Helper to ensure each row has enough duplicated items so the loop never has an empty gap
-function prepareTrack(items, minCount = 8) {
+function prepareTrack(items, minCount = 12) {
   if (!items || items.length === 0) return []
   let result = [...items]
   while (result.length < minCount) {
@@ -30,8 +30,8 @@ export default function GalleryGrid({ photos = allMainGalleryPhotos, limit, filt
   const row1Raw = row1Base.length > 0 ? row1Base : displayedImages
   const row2Raw = row2Base.length > 0 ? row2Base : [...displayedImages].reverse()
 
-  const row1Items = prepareTrack(row1Raw, 8)
-  const row2Items = prepareTrack(row2Raw, 8)
+  const row1Items = prepareTrack(row1Raw, 12)
+  const row2Items = prepareTrack(row2Raw, 12)
 
   // Handle touch swipe for mobile lightbox interactions
   const handleTouchStart = (e) => {
@@ -105,7 +105,7 @@ export default function GalleryGrid({ photos = allMainGalleryPhotos, limit, filt
           if (idx !== -1) setActiveImageIndex(idx)
         }
       }}
-      className="group/card relative shrink-0 w-[260px] sm:w-[320px] md:w-[360px] lg:w-[400px] aspect-[16/10] rounded-2xl overflow-hidden shadow-md hover:shadow-xl border border-[#173F35]/15 bg-white transition-all duration-300 hover:scale-[1.03] hover:border-[#173F35]/40 cursor-pointer select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[#173F35]"
+      className="group/card relative shrink-0 w-[150px] sm:w-[180px] md:w-[200px] lg:w-[220px] aspect-[16/10] rounded-xl overflow-hidden shadow-md hover:shadow-xl border border-[#133A2E]/15 bg-white transition-all duration-300 hover:scale-[1.03] hover:border-[#133A2E]/40 cursor-pointer select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[#133A2E]"
       aria-label={isClone ? undefined : `View full photo: ${image.title}`}
     >
       <img
@@ -174,7 +174,7 @@ export default function GalleryGrid({ photos = allMainGalleryPhotos, limit, filt
           >
             {/* Top Bar with Counter and Close Button */}
             <div className="w-full flex items-center justify-between text-white/80 pb-3 px-1">
-              <span className="text-xs font-semibold tracking-wider text-[#D5AA54]">
+              <span className="text-xs font-mono font-medium tracking-widest text-[#D4A338] uppercase">
                 Photo {activeImageIndex + 1} of {displayedImages.length}
               </span>
 
@@ -206,7 +206,7 @@ export default function GalleryGrid({ photos = allMainGalleryPhotos, limit, filt
                     (activeImageIndex - 1 + displayedImages.length) % displayedImages.length
                   )
                 }}
-                className="absolute left-2 top-1/2 -translate-y-1/2 p-2.5 sm:p-3 rounded-full bg-black/70 text-white hover:bg-[#D5AA54] hover:text-[#173F35] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white cursor-pointer shadow-lg"
+                className="absolute left-2 top-1/2 -translate-y-1/2 p-2.5 sm:p-3 rounded-full bg-black/70 text-white hover:bg-[#D4A338] hover:text-[#133A2E] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white cursor-pointer shadow-lg"
                 aria-label="Previous photo"
               >
                 <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -219,7 +219,7 @@ export default function GalleryGrid({ photos = allMainGalleryPhotos, limit, filt
                   e.stopPropagation()
                   setActiveImageIndex((activeImageIndex + 1) % displayedImages.length)
                 }}
-                className="absolute right-2 top-1/2 -translate-y-1/2 p-2.5 sm:p-3 rounded-full bg-black/70 text-white hover:bg-[#D5AA54] hover:text-[#173F35] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white cursor-pointer shadow-lg"
+                className="absolute right-2 top-1/2 -translate-y-1/2 p-2.5 sm:p-3 rounded-full bg-black/70 text-white hover:bg-[#D4A338] hover:text-[#133A2E] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white cursor-pointer shadow-lg"
                 aria-label="Next photo"
               >
                 <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -229,11 +229,11 @@ export default function GalleryGrid({ photos = allMainGalleryPhotos, limit, filt
             {/* Responsive Caption Box */}
             <div className="mt-3 sm:mt-4 text-center text-white max-w-2xl px-2">
               {displayedImages[activeImageIndex].category && (
-                <span className="text-[11px] sm:text-xs uppercase font-bold tracking-widest text-[#D5AA54]">
+                <span className="text-[11px] sm:text-xs uppercase font-mono font-medium tracking-widest text-[#D4A338]">
                   {displayedImages[activeImageIndex].category}
                 </span>
               )}
-              <h3 className="heading-serif text-base sm:text-lg font-bold mt-0.5 leading-snug">
+              <h3 className="heading-serif text-lg sm:text-xl font-normal mt-0.5 leading-snug">
                 {displayedImages[activeImageIndex].title}
               </h3>
               <p className="text-xs sm:text-sm text-neutral-300 mt-1 line-clamp-2 sm:line-clamp-none">

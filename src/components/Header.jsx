@@ -1,35 +1,92 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { Phone, MapPin, Menu, X, ChevronRight } from 'lucide-react'
+import { Phone, MapPin, Menu, X, ChevronRight, ChevronDown } from 'lucide-react'
 import Logo from './Logo'
 import Modal from './Modal'
 import EstimateForm from './EstimateForm'
 
-const navLinks = [
-  { label: 'Home', path: '/' },
+const serviceLinks = [
   { label: 'Well Drilling', path: '/well-drilling' },
   { label: 'Well Deepening', path: '/well-deepening' },
   { label: 'Water Treatment System', path: '/water-treatment-system' },
-  { label: 'Gallery', path: '/gallery' },
   { label: 'Pump Sales & Service', path: '/pump-sales--service---installation' },
-  { label: 'Estimate Request', path: '/estimate-request', isCta: true },
+]
+
+const servicePaths = [
+  '/well-drilling',
+  '/well-deepening',
+  '/water-treatment-system',
+  '/pump-sales--service---installation',
+  '/pump-sales',
 ]
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [quickEstimateOpen, setQuickEstimateOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [servicesOpen, setServicesOpen] = useState(false)
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false)
+
   const location = useLocation()
   const [prevPathname, setPrevPathname] = useState(location.pathname)
 
-  // Sync mobile menu close when route changes during render (React recommended pattern)
+  const servicesDropdownRef = useRef(null)
+  const timeoutRef = useRef(null)
+
+  const isServicesActive = servicePaths.includes(location.pathname)
+
+  // Sync menu close when route changes during render (React recommended pattern)
   if (prevPathname !== location.pathname) {
     setPrevPathname(location.pathname)
     setMobileMenuOpen(false)
+    setServicesOpen(false)
   }
 
-  const isHome = location.pathname === '/'
-  const isTransparent = isHome && !isScrolled
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen((prev) => {
+      const next = !prev
+      if (next && isServicesActive) {
+        setMobileServicesOpen(true)
+      }
+      return next
+    })
+  }
+
+  // Desktop hover handlers with generous debounce to prevent accidental menu closure
+  const handleServicesMouseEnter = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+      timeoutRef.current = null
+    }
+    setServicesOpen(true)
+  }
+
+  const handleServicesMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setServicesOpen(false)
+    }, 180)
+  }
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    }
+  }, [])
+
+  // Close desktop services dropdown on click outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        servicesDropdownRef.current &&
+        !servicesDropdownRef.current.contains(event.target)
+      ) {
+        setServicesOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
 
   // Prevent background scrolling while mobile drawer is open
   useEffect(() => {
@@ -42,25 +99,27 @@ export default function Header() {
     }
   }, [mobileMenuOpen])
 
-  // Listen for scroll to elevate sticky header
+  // Listen for scroll to elevate sticky header immediately when user scrolls
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
+      setIsScrolled(window.scrollY > 10)
     }
+    handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Close mobile menu on Escape key
+  // Close menus on Escape key
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape' && mobileMenuOpen) {
-        setMobileMenuOpen(false)
+      if (e.key === 'Escape') {
+        if (mobileMenuOpen) setMobileMenuOpen(false)
+        if (servicesOpen) setServicesOpen(false)
       }
     }
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [mobileMenuOpen])
+  }, [mobileMenuOpen, servicesOpen])
 
   // Automatically close mobile menu if screen resizes to tablet/desktop (>= 768px)
   useEffect(() => {
@@ -76,91 +135,203 @@ export default function Header() {
   return (
     <>
       <header
-        className={`sticky top-0 z-40 w-full transition-all duration-300 ${
-          isTransparent
-            ? 'bg-[#173F35]/35 border-b border-white/10 shadow-none backdrop-blur-xs'
-            : isScrolled
-              ? 'bg-[#173F35]/50 backdrop-blur-md shadow-md border-b border-[#173F35]/40 text-white'
-              : 'bg-[#173F35] shadow-xs border-b border-[#173F35]/40 text-white'
+        className={`sticky top-0 z-50 w-full transition-all duration-150 ${
+          isScrolled
+            ? 'pt-2 sm:pt-3 px-3 sm:px-4 md:px-6 pointer-events-none'
+            : 'pt-0 px-0 pointer-events-auto bg-transparent'
         }`}
       >
-        <div className="w-full max-w-[1440px] mx-auto px-3 sm:px-4 md:px-2 lg:px-6 xl:px-8">
+        <div
+          className={`mx-auto transition-all duration-150 pointer-events-auto ${
+            isScrolled
+              ? 'max-w-6xl px-3 sm:px-4 md:px-4 lg:px-6 py-1.5 sm:py-2 bg-[#F8FAFC]/36 backdrop-blur-md rounded-2xl border border-[#E2E8F0] shadow-sm text-[#133A2E]'
+              : 'w-full max-w-[1440px] px-3 sm:px-4 md:px-4 lg:px-6 xl:px-8 py-2 sm:py-2.5 bg-transparent border-transparent text-[#133A2E]'
+          } ${mobileMenuOpen && !isScrolled ? 'bg-white rounded-2xl border border-[#E2E8F0] shadow-lg' : ''}`}
+        >
           {/* Single Unified Horizontal Navbar Row */}
           <nav
             aria-label="Main Navigation"
-            className={`flex items-center justify-between gap-1 md:gap-1.5 lg:gap-4 xl:gap-6 transition-all duration-300 ${
-              isScrolled ? 'py-1.5 sm:py-2 md:py-2' : 'py-2 sm:py-2.5 md:py-2.5'
-            }`}
+            className="flex items-center justify-between gap-2 sm:gap-3 md:gap-4 lg:gap-6 transition-all duration-150"
           >
-            {/* Left: Authentic Brand Logo */}
+            {/* Left: Authentic Brand Logo with crisp light styling */}
             <Link
               to="/"
-              className="flex items-center shrink-0 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D5AA54] rounded-lg p-0.5 cursor-pointer"
+              className="flex items-center shrink-0 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#133A2E] rounded-lg p-0.5 cursor-pointer"
               aria-label="Werner & Sons Well Drilling Home"
               onClick={() => setMobileMenuOpen(false)}
             >
               <Logo
                 variant="horizontal"
-                theme="dark"
-                className="h-7 sm:h-8 md:h-[21px] lg:h-[28px] xl:h-[36px] w-auto transition-transform duration-200 group-hover:scale-[1.01]"
+                theme="light"
+                className={`w-auto transition-all duration-150 group-hover:scale-[1.01] ${
+                  isScrolled
+                    ? 'h-7 sm:h-8 md:h-[24px] lg:h-[30px] xl:h-[36px]'
+                    : 'h-8 sm:h-9 md:h-[26px] lg:h-[34px] xl:h-[42px]'
+                }`}
               />
             </Link>
 
             {/* Center: Tablet & Desktop Navigation Links (md / 768px+) */}
-            <ul className="hidden md:flex items-center gap-0 md:gap-0.5 lg:gap-1.5 xl:gap-2 flex-1 justify-center min-w-0">
-              {navLinks
-                .filter((item) => !item.isCta)
-                .map((item) => (
-                  <li key={item.path} className="shrink-0">
-                    <NavLink
-                      to={item.path}
-                      end={item.path === '/'}
-                      className={({ isActive }) =>
-                        `relative block px-1 md:px-1 lg:px-2.5 xl:px-3 py-1 md:py-1 lg:py-1.5 text-[10px] md:text-[10px] lg:text-xs xl:text-sm font-semibold md:font-semibold lg:font-medium transition-all duration-200 rounded-md cursor-pointer select-none group whitespace-nowrap ${
-                          isActive
-                            ? 'text-[#D5AA54] font-bold bg-white/10 shadow-xs'
-                            : 'text-white/90 hover:text-white hover:bg-white/10'
-                        }`
-                      }
-                    >
-                      {({ isActive }) => (
-                        <>
-                          <span>{item.label}</span>
-                          {/* Animated Underline Transition */}
-                          <span
-                            className={`absolute bottom-0.5 left-1 md:left-1 lg:left-2.5 xl:left-3 right-1 md:right-1 lg:right-2.5 xl:right-3 h-[2px] bg-[#D5AA54] rounded-full transition-transform duration-300 origin-left ${
-                              isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+            {/* Exactly ordered: 1. Home, 2. Gallery (Center), 3. Services (with chevron dropdown) */}
+            <ul className="hidden md:flex items-center gap-1 sm:gap-2 md:gap-3 lg:gap-5 flex-1 justify-center min-w-0">
+              {/* 1. Home */}
+              <li className="shrink-0">
+                <NavLink
+                  to="/"
+                  end
+                  className={({ isActive }) =>
+                    `relative block px-3 lg:px-4 py-1.5 md:py-2 text-sm md:text-[15px] lg:text-base transition-all duration-150 rounded-md cursor-pointer select-none group whitespace-nowrap ${
+                      isActive
+                        ? 'text-[#133A2E] font-bold bg-[#133A2E]/10 shadow-2xs'
+                        : 'text-[#133A2E] font-semibold hover:text-[#0B241C] hover:bg-[#133A2E]/5'
+                    }`
+                  }
+                >
+                  {({ isActive }) => (
+                    <>
+                      <span>Home</span>
+                      {/* Animated Underline Transition */}
+                      <span
+                        className={`absolute bottom-0.5 left-3 lg:left-4 right-3 lg:right-4 h-[2px] bg-[#133A2E] rounded-full transition-transform duration-150 origin-left ${
+                          isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                        }`}
+                      />
+                    </>
+                  )}
+                </NavLink>
+              </li>
+
+              {/* 2. Gallery (Positioned in Center) */}
+              <li className="shrink-0">
+                <NavLink
+                  to="/gallery"
+                  className={({ isActive }) =>
+                    `relative block px-3 lg:px-4 py-1.5 md:py-2 text-sm md:text-[15px] lg:text-base transition-all duration-150 rounded-md cursor-pointer select-none group whitespace-nowrap ${
+                      isActive
+                        ? 'text-[#133A2E] font-bold bg-[#133A2E]/10 shadow-2xs'
+                        : 'text-[#133A2E] font-semibold hover:text-[#0B241C] hover:bg-[#133A2E]/5'
+                    }`
+                  }
+                >
+                  {({ isActive }) => (
+                    <>
+                      <span>Gallery</span>
+                      {/* Animated Underline Transition */}
+                      <span
+                        className={`absolute bottom-0.5 left-3 lg:left-4 right-3 lg:right-4 h-[2px] bg-[#133A2E] rounded-full transition-transform duration-150 origin-left ${
+                          isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                        }`}
+                      />
+                    </>
+                  )}
+                </NavLink>
+              </li>
+
+              {/* 3. Services Dropdown Menu */}
+              <li
+                className="relative shrink-0"
+                ref={servicesDropdownRef}
+                onMouseEnter={handleServicesMouseEnter}
+                onMouseLeave={handleServicesMouseLeave}
+              >
+                <button
+                  type="button"
+                  onClick={() => setServicesOpen((prev) => !prev)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault()
+                      setServicesOpen((prev) => !prev)
+                    }
+                  }}
+                  aria-expanded={servicesOpen}
+                  aria-haspopup="true"
+                  className={`relative inline-flex items-center gap-1.5 px-3 lg:px-4 py-1.5 md:py-2 text-sm md:text-[15px] lg:text-base transition-all duration-150 rounded-md cursor-pointer select-none group whitespace-nowrap ${
+                    isServicesActive || servicesOpen
+                      ? 'text-[#133A2E] font-bold bg-[#133A2E]/10 shadow-2xs'
+                      : 'text-[#133A2E] font-semibold hover:text-[#0B241C] hover:bg-[#133A2E]/5'
+                  }`}
+                >
+                  <span>Services</span>
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform duration-200 ${
+                      servicesOpen ? 'rotate-180 text-[#D4A338]' : 'text-[#133A2E]/70 group-hover:text-[#133A2E]'
+                    }`}
+                  />
+                  {/* Animated Underline Transition */}
+                  <span
+                    className={`absolute bottom-0.5 left-3 lg:left-4 right-3 lg:right-4 h-[2px] bg-[#133A2E] rounded-full transition-transform duration-150 origin-left ${
+                      isServicesActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                    }`}
+                  />
+                </button>
+
+                {/* Dropdown Menu Panel (Right-aligned under trigger: right-0) */}
+                {servicesOpen && (
+                  <div
+                    className="absolute right-0 top-full pt-1.5 w-60 sm:w-64 z-50 animate-in fade-in zoom-in-95 duration-150"
+                    role="menu"
+                    aria-orientation="vertical"
+                    aria-label="Services Menu"
+                  >
+                    <div className="bg-white rounded-xl border border-[#E2E8F0] shadow-lg py-2 text-left">
+                      <div className="px-3.5 py-1.5 mb-1 border-b border-[#E2E8F0]/70 flex items-center justify-between">
+                        <span className="text-[10px] font-mono font-medium uppercase tracking-widest text-[#D4A338]">
+                          Our Well Services
+                        </span>
+                        <span className="text-[10px] font-mono text-[#475569]/70">4 Areas</span>
+                      </div>
+                      {serviceLinks.map((service) => {
+                        const isCurrent =
+                          location.pathname === service.path ||
+                          (service.path === '/pump-sales--service---installation' && location.pathname === '/pump-sales')
+                        return (
+                          <Link
+                            key={service.path}
+                            to={service.path}
+                            role="menuitem"
+                            onClick={() => setServicesOpen(false)}
+                            className={`flex items-center justify-between px-3.5 py-2.5 mx-1.5 rounded-lg text-xs sm:text-sm font-medium transition-colors cursor-pointer ${
+                              isCurrent
+                                ? 'bg-[#133A2E]/10 text-[#133A2E] font-bold shadow-2xs'
+                                : 'text-[#133A2E] hover:bg-[#F1F5F9] hover:text-[#0B241C]'
                             }`}
-                          />
-                        </>
-                      )}
-                    </NavLink>
-                  </li>
-                ))}
+                          >
+                            <span>{service.label}</span>
+                            {isCurrent && (
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#D4A338] shrink-0" />
+                            )}
+                          </Link>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )}
+              </li>
             </ul>
 
-            {/* Right: Prominent Gold CTA Navigation Item (Tablet, Laptop & Desktop md+) */}
+            {/* Right: Prominent Gold CTA Navigation Item with continuous light-yellow aura & shimmering border */}
             <div className="hidden md:flex items-center shrink-0">
-              <NavLink
-                to="/estimate-request"
-                className={({ isActive }) =>
-                  `inline-flex items-center gap-1 lg:gap-1.5 px-2 md:px-2 lg:px-3.5 xl:px-4 py-1.5 md:py-1.5 lg:py-2 text-[10px] md:text-[10px] lg:text-xs xl:text-sm font-bold rounded-lg transition-all duration-200 cursor-pointer shadow-xs hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap group ${
-                    isActive
-                      ? 'bg-[#c49942] text-[#173F35] ring-2 ring-white/30'
-                      : 'bg-[#D5AA54] text-[#173F35] hover:bg-[#c49942]'
-                  }`
-                }
-              >
-                <span>Estimate Request</span>
-                <ChevronRight className="hidden lg:inline w-3.5 h-3.5 lg:w-4 lg:h-4 transition-transform group-hover:translate-x-0.5" />
-              </NavLink>
+              <div className="glow-shimmer-btn-wrapper">
+                <div className="glow-shimmer-border" aria-hidden="true" />
+                <NavLink
+                  to="/estimate-request"
+                  className={({ isActive }) =>
+                    `relative z-10 inline-flex items-center gap-1.5 px-3.5 md:px-4 lg:px-5 py-2 md:py-2 lg:py-2.5 text-xs md:text-sm lg:text-[15px] font-bold rounded-[11px] bg-[#D4A338] text-[#133A2E] hover:bg-[#C2922B] transition-colors whitespace-nowrap group cursor-pointer ${
+                      isActive ? 'ring-2 ring-[#133A2E]/20' : ''
+                    }`
+                  }
+                >
+                  <span>Estimate Request</span>
+                  <ChevronRight className="w-3.5 h-3.5 lg:w-4 lg:h-4 transition-transform group-hover:translate-x-0.5 text-[#133A2E]" />
+                </NavLink>
+              </div>
             </div>
 
             {/* Mobile Actions Only (< md / 768px) */}
             <div className="flex items-center gap-2 md:hidden">
               <a
                 href="tel:6102585615"
-                className="flex items-center justify-center w-9 h-9 rounded-full bg-[#D5AA54] text-[#173F35] hover:bg-[#c49942] transition-colors shadow-xs cursor-pointer active:scale-95"
+                className="flex items-center justify-center w-9 h-9 rounded-full bg-[#D4A338] text-[#133A2E] hover:bg-[#C2922B] transition-colors shadow-xs cursor-pointer active:scale-95"
                 aria-label="Call (610) 258-5615"
               >
                 <Phone className="w-4 h-4" />
@@ -168,59 +339,131 @@ export default function Header() {
 
               <button
                 type="button"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="flex items-center justify-center w-9 h-9 rounded-lg border border-white/20 text-white hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D5AA54] cursor-pointer active:scale-95 transition-all"
+                onClick={toggleMobileMenu}
+                className="flex items-center justify-center w-9 h-9 rounded-lg border border-[#E2E8F0] text-[#133A2E] hover:bg-neutral-100/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#133A2E] cursor-pointer active:scale-95 transition-all duration-150"
                 aria-expanded={mobileMenuOpen}
                 aria-label="Toggle navigation menu"
               >
-                <div className={`transition-transform duration-300 ${mobileMenuOpen ? 'rotate-90' : 'rotate-0'}`}>
+                <div className={`transition-transform duration-150 ${mobileMenuOpen ? 'rotate-90' : 'rotate-0'}`}>
                   {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
                 </div>
               </button>
             </div>
           </nav>
-        </div>
 
-        {/* Mobile Drawer Navigation Only (< md / 768px) */}
-        {mobileMenuOpen && (
-          <div className="md:hidden relative z-40 bg-[#173F35] border-b border-[#173F35]/40 px-4 pt-3 pb-6 shadow-2xl max-h-[calc(100dvh-70px)] overflow-y-auto overscroll-contain animate-slide-down text-white">
-            <div className="space-y-1 mb-5">
-              {navLinks.map((item) => (
+          {/* Mobile Drawer Navigation Only (< md / 768px) */}
+          {mobileMenuOpen && (
+            <div className="md:hidden mt-3 pt-3 pb-2 border-t border-[#E2E8F0] space-y-1 animate-slide-down text-[#133A2E]">
+              <div className="space-y-1 mb-4">
+                {/* 1. Mobile Home */}
                 <Link
-                  key={item.path}
-                  to={item.path}
+                  to="/"
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`block px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
-                    item.isCta
-                      ? 'bg-[#D5AA54] text-[#173F35] font-bold mt-2 text-center shadow-xs hover:bg-[#c49942]'
-                      : 'text-white/90 hover:bg-white/10 hover:text-white'
+                  className={`block px-3.5 py-2.5 rounded-lg text-[15px] transition-colors cursor-pointer ${
+                    location.pathname === '/'
+                      ? 'text-[#133A2E] font-bold bg-[#133A2E]/10'
+                      : 'text-[#133A2E] font-semibold hover:bg-[#133A2E]/5 hover:text-[#0B241C]'
                   }`}
                 >
-                  {item.label}
+                  Home
                 </Link>
-              ))}
-            </div>
 
-            <div className="border-t border-white/15 pt-4 space-y-2 text-xs text-white/80 text-left">
-              <p className="flex items-center gap-2 text-white font-semibold">
-                <Phone className="w-3.5 h-3.5 text-[#D5AA54]" />
-                <a href="tel:6102585615" className="hover:underline cursor-pointer">
-                  (610) 258-5615 &bull; 24-Hour Emergency Service
-                </a>
-              </p>
-              <p className="flex items-center gap-2 text-white/70">
-                <MapPin className="w-3.5 h-3.5 text-[#D5AA54]" />
-                <span>Easton, PA 18040 &bull; Serving Lehigh Valley</span>
-              </p>
+                {/* 2. Mobile Gallery (Positioned in Center) */}
+                <Link
+                  to="/gallery"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`block px-3.5 py-2.5 rounded-lg text-[15px] transition-colors cursor-pointer ${
+                    location.pathname === '/gallery'
+                      ? 'text-[#133A2E] font-bold bg-[#133A2E]/10'
+                      : 'text-[#133A2E] font-semibold hover:bg-[#133A2E]/5 hover:text-[#0B241C]'
+                  }`}
+                >
+                  Gallery
+                </Link>
+
+                {/* 3. Mobile Expandable Services Accordion */}
+                <div>
+                  <button
+                    type="button"
+                    onClick={() => setMobileServicesOpen((prev) => !prev)}
+                    className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-lg text-[15px] transition-colors cursor-pointer ${
+                      isServicesActive
+                        ? 'text-[#133A2E] font-bold bg-[#133A2E]/10'
+                        : 'text-[#133A2E] font-semibold hover:bg-[#133A2E]/5 hover:text-[#0B241C]'
+                    }`}
+                    aria-expanded={mobileServicesOpen}
+                  >
+                    <span>Services</span>
+                    <ChevronDown
+                      className={`w-4 h-4 transition-transform duration-200 ${
+                        mobileServicesOpen ? 'rotate-180 text-[#D4A338]' : 'text-[#133A2E]/70'
+                      }`}
+                    />
+                  </button>
+
+                  {mobileServicesOpen && (
+                    <div className="pl-3 pr-1 py-1 space-y-1 mt-1 border-l-2 border-[#D4A338]/50 ml-3 animate-in fade-in duration-150">
+                      {serviceLinks.map((service) => {
+                        const isCurrent =
+                          location.pathname === service.path ||
+                          (service.path === '/pump-sales--service---installation' && location.pathname === '/pump-sales')
+                        return (
+                          <Link
+                            key={service.path}
+                            to={service.path}
+                            onClick={() => setMobileMenuOpen(false)}
+                            className={`flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-colors cursor-pointer ${
+                              isCurrent
+                                ? 'bg-[#133A2E]/15 text-[#133A2E] font-bold'
+                                : 'text-[#475569] font-medium hover:bg-[#133A2E]/5 hover:text-[#133A2E]'
+                            }`}
+                          >
+                            <span>{service.label}</span>
+                            {isCurrent && (
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#D4A338] shrink-0" />
+                            )}
+                          </Link>
+                        )
+                      })}
+                    </div>
+                  )}
+                </div>
+
+                {/* 4. Mobile Estimate Request CTA with light-yellow aura & shimmering border */}
+                <div className="glow-shimmer-btn-wrapper w-full mt-2">
+                  <div className="glow-shimmer-border" aria-hidden="true" />
+                  <Link
+                    to="/estimate-request"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="relative z-10 w-full inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-[11px] text-[15px] font-bold bg-[#D4A338] text-[#133A2E] hover:bg-[#C2922B] transition-colors cursor-pointer"
+                  >
+                    <span>Estimate Request</span>
+                    <ChevronRight className="w-4 h-4 text-[#133A2E]" />
+                  </Link>
+                </div>
+              </div>
+
+              <div className="border-t border-[#E2E8F0] pt-3 pb-1 space-y-1.5 text-xs text-[#475569] text-left">
+                <p className="flex items-center gap-2 text-[#133A2E] font-semibold">
+                  <Phone className="w-3.5 h-3.5 text-[#133A2E]" />
+                  <a href="tel:6102585615" className="hover:underline cursor-pointer">
+                    (610) 258-5615 &bull; 24-Hour Emergency Service
+                  </a>
+                </p>
+                <p className="flex items-center gap-2 text-[#475569]">
+                  <MapPin className="w-3.5 h-3.5 text-[#133A2E]" />
+                  <span>Easton, PA 18040 &bull; Serving Lehigh Valley</span>
+                </p>
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </header>
 
       {/* Backdrop overlay for mobile menu */}
       {mobileMenuOpen && (
         <div
-          className="fixed inset-0 top-[56px] sm:top-[60px] bg-black/60 z-30 md:hidden backdrop-blur-xs transition-opacity"
+          className="fixed inset-0 bg-black/50 z-40 md:hidden backdrop-blur-xs transition-opacity duration-150"
           onClick={() => setMobileMenuOpen(false)}
           aria-hidden="true"
         />

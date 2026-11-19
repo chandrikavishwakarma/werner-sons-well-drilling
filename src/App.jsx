@@ -27,7 +27,7 @@ export default function App() {
     <BrowserRouter>
       <ScrollToTop />
       <CustomCursor />
-      <div className="min-h-screen flex flex-col bg-[#F7F7F2] text-[#252D2A] selection:bg-[#D5AA54]/30 selection:text-[#173F35]">
+      <div className="min-h-screen flex flex-col bg-[#F8FAFC] text-[#475569] selection:bg-[#D4A338]/30 selection:text-[#133A2E]">
         <Header />
 
         <main className="flex-1">

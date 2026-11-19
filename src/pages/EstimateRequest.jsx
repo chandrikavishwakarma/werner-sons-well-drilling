@@ -12,7 +12,7 @@ export default function EstimateRequest() {
   }, [])
 
   return (
-    <div className="bg-[#F7F7F2]">
+    <div className="bg-[#F8FAFC]">
       {/* Modernized Full-Width Photography Hero Header */}
       <PageHero
         breadcrumbText="Estimate Request"
@@ -36,42 +36,42 @@ export default function EstimateRequest() {
             {/* Left Column: Contact Information & Hours (5 Cols) */}
             <div className="lg:col-span-5 space-y-6 text-left">
               {/* Company Info Box */}
-              <div className="bg-white rounded-2xl border border-[#E3E8E3] p-6 sm:p-8 shadow-xs card-hover">
-                <h3 className="heading-serif text-2xl font-bold text-[#173F35] mb-2">
-                  Contact Us Directly
+              <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6 sm:p-8 shadow-xs card-hover">
+                <h3 className="heading-serif text-2xl sm:text-3xl font-normal text-[#133A2E] mb-2">
+                  Contact Us <span className="italic">Directly</span>
                 </h3>
-                <p className="text-sm text-[#64706A] leading-relaxed mb-6">
+                <p className="text-sm text-[#475569] leading-relaxed mb-6">
                   For immediate assistance, urgent pump failure, or scheduled well drilling inquiries, reach out to our family team anytime.
                 </p>
 
                 <div className="space-y-5 text-sm">
                   {/* Phone */}
                   <div className="flex items-start gap-3.5">
-                    <div className="w-9 h-9 rounded-full bg-[#EAF0E9] flex items-center justify-center text-[#2D6654] shrink-0 mt-0.5 shadow-2xs">
-                      <Phone className="w-4 h-4 text-[#2D6654]" />
+                    <div className="w-9 h-9 rounded-full bg-[#F1F5F9] flex items-center justify-center text-[#0284C7] shrink-0 mt-0.5 shadow-2xs">
+                      <Phone className="w-4 h-4 text-[#0284C7]" />
                     </div>
                     <div>
-                      <p className="text-xs uppercase font-bold text-[#64706A]">Phone (Answered 24/7)</p>
+                      <p className="text-xs uppercase font-mono font-medium tracking-widest text-[#475569]">Phone (Answered 24/7)</p>
                       <a
                         href="tel:6102585615"
-                        className="text-lg font-bold text-[#173F35] hover:text-[#2D6654] hover:underline cursor-pointer transition-colors"
+                        className="text-lg font-bold text-[#133A2E] hover:text-[#0284C7] hover:underline cursor-pointer transition-colors"
                       >
                         (610) 258-5615
                       </a>
-                      <p className="text-xs text-[#64706A] mt-0.5">24-Hour Emergency Service</p>
+                      <p className="text-xs text-[#475569] mt-0.5">24-Hour Emergency Service</p>
                     </div>
                   </div>
 
                   {/* Email */}
                   <div className="flex items-start gap-3.5">
-                    <div className="w-9 h-9 rounded-full bg-[#EAF0E9] flex items-center justify-center text-[#2D6654] shrink-0 mt-0.5 shadow-2xs">
-                      <Mail className="w-4 h-4 text-[#2D6654]" />
+                    <div className="w-9 h-9 rounded-full bg-[#F1F5F9] flex items-center justify-center text-[#0284C7] shrink-0 mt-0.5 shadow-2xs">
+                      <Mail className="w-4 h-4 text-[#0284C7]" />
                     </div>
                     <div>
-                      <p className="text-xs uppercase font-bold text-[#64706A]">Email Inquiries</p>
+                      <p className="text-xs uppercase font-mono font-medium tracking-widest text-[#475569]">Email Inquiries</p>
                       <a
                         href="mailto:wernerandsons@yahoo.com"
-                        className="text-sm font-semibold text-[#173F35] hover:text-[#2D6654] hover:underline cursor-pointer transition-colors break-all"
+                        className="text-sm font-semibold text-[#133A2E] hover:text-[#0284C7] hover:underline cursor-pointer transition-colors break-all"
                       >
                         wernerandsons@yahoo.com
                       </a>
@@ -80,13 +80,13 @@ export default function EstimateRequest() {
 
                   {/* Address */}
                   <div className="flex items-start gap-3.5">
-                    <div className="w-9 h-9 rounded-full bg-[#EAF0E9] flex items-center justify-center text-[#2D6654] shrink-0 mt-0.5 shadow-2xs">
-                      <MapPin className="w-4 h-4 text-[#2D6654]" />
+                    <div className="w-9 h-9 rounded-full bg-[#F1F5F9] flex items-center justify-center text-[#0284C7] shrink-0 mt-0.5 shadow-2xs">
+                      <MapPin className="w-4 h-4 text-[#0284C7]" />
                     </div>
                     <div>
-                      <p className="text-xs uppercase font-bold text-[#64706A]">Headquarters &amp; Service Area</p>
-                      <p className="font-semibold text-[#252D2A]">Easton, PA 18040 &bull; PA 18042-9493</p>
-                      <p className="text-xs text-[#64706A] mt-0.5">
+                      <p className="text-xs uppercase font-mono font-medium tracking-widest text-[#475569]">Headquarters &amp; Service Area</p>
+                      <p className="font-semibold text-[#133A2E]">Easton, PA 18040 &bull; PA 18042-9493</p>
+                      <p className="text-xs text-[#475569] mt-0.5">
                         Northampton, Lehigh, Monroe, Carbon &amp; Poconos
                       </p>
                     </div>
@@ -94,35 +94,35 @@ export default function EstimateRequest() {
 
                   {/* Hours */}
                   <div className="flex items-start gap-3.5">
-                    <div className="w-9 h-9 rounded-full bg-[#EAF0E9] flex items-center justify-center text-[#2D6654] shrink-0 mt-0.5 shadow-2xs">
-                      <Clock className="w-4 h-4 text-[#2D6654]" />
+                    <div className="w-9 h-9 rounded-full bg-[#F1F5F9] flex items-center justify-center text-[#0284C7] shrink-0 mt-0.5 shadow-2xs">
+                      <Clock className="w-4 h-4 text-[#0284C7]" />
                     </div>
                     <div>
-                      <p className="text-xs uppercase font-bold text-[#64706A]">Hours of Operation</p>
-                      <p className="font-semibold text-[#252D2A]">24-Hour Emergency Service</p>
-                      <p className="text-xs text-[#64706A] mt-0.5">Phones Answered 24 Hours a Day</p>
+                      <p className="text-xs uppercase font-mono font-medium tracking-widest text-[#475569]">Hours of Operation</p>
+                      <p className="font-semibold text-[#133A2E]">24-Hour Emergency Service</p>
+                      <p className="text-xs text-[#475569] mt-0.5">Phones Answered 24 Hours a Day</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-8 pt-5 border-t border-[#E3E8E3] space-y-2 text-xs text-[#64706A]">
-                  <div className="flex items-center gap-2 text-[#173F35] font-semibold">
-                    <ShieldCheck className="w-4 h-4 text-[#D5AA54]" />
+                <div className="mt-8 pt-5 border-t border-[#E2E8F0] space-y-2 text-xs text-[#475569]">
+                  <div className="flex items-center gap-2 text-[#133A2E] font-semibold">
+                    <ShieldCheck className="w-4 h-4 text-[#D4A338]" />
                     <span>Free, No-Obligation Estimates</span>
                   </div>
-                  <div className="flex items-center gap-2 text-[#173F35] font-semibold">
-                    <CheckCircle2 className="w-4 h-4 text-[#D5AA54]" />
+                  <div className="flex items-center gap-2 text-[#133A2E] font-semibold">
+                    <CheckCircle2 className="w-4 h-4 text-[#D4A338]" />
                     <span>Cash &amp; Personal Checks Accepted</span>
                   </div>
                 </div>
               </div>
 
               {/* Direct Urgent Emergency Box */}
-              <div className="bg-[#173F35] text-white rounded-2xl p-6 shadow-xs card-hover">
-                <span className="text-xs uppercase font-bold text-[#D5AA54] tracking-widest">
+              <div className="bg-[#133A2E] text-white rounded-2xl p-6 shadow-xs card-hover">
+                <span className="text-xs uppercase font-mono font-medium text-[#D4A338] tracking-widest">
                   Urgent Well Situation?
                 </span>
-                <h4 className="heading-serif text-xl font-bold mt-1 mb-2">
+                <h4 className="heading-serif text-2xl font-normal mt-1 mb-2">
                   Immediate Emergency Service
                 </h4>
                 <p className="text-xs text-white/80 leading-relaxed mb-4">

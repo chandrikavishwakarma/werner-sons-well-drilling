@@ -70,18 +70,18 @@ export default function Modal({
         ref={modalRef}
         tabIndex={-1}
         onClick={(e) => e.stopPropagation()}
-        className={`relative w-full ${maxWidth} max-h-[90dvh] flex flex-col bg-white rounded-2xl shadow-2xl border border-[#E3E8E3] overflow-hidden animate-modal-in focus:outline-none`}
+        className={`relative w-full ${maxWidth} max-h-[90dvh] flex flex-col bg-white rounded-2xl shadow-2xl border border-[#E2E8F0] overflow-hidden animate-modal-in focus:outline-none`}
       >
         {/* Modal Header */}
-        <div className="flex items-start justify-between p-5 sm:p-6 border-b border-[#E3E8E3] bg-[#F7F7F2]/50 shrink-0">
+        <div className="flex items-start justify-between p-5 sm:p-6 border-b border-[#E2E8F0] bg-[#F8FAFC] shrink-0">
           <div className="pr-6 text-left">
             {title && (
-              <h3 className="heading-serif text-xl sm:text-2xl font-bold text-[#173F35]">
+              <h3 className="heading-serif text-xl sm:text-2xl font-normal text-[#133A2E]">
                 {title}
               </h3>
             )}
             {subtitle && (
-              <p className="text-xs sm:text-sm text-[#64706A] mt-1 leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#475569] mt-1 leading-relaxed">
                 {subtitle}
               </p>
             )}
@@ -91,7 +91,7 @@ export default function Modal({
           <button
             type="button"
             onClick={onClose}
-            className="inline-flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full text-[#64706A] hover:text-[#173F35] hover:bg-neutral-200/60 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#173F35] shrink-0 cursor-pointer"
+            className="inline-flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full text-[#475569] hover:text-[#133A2E] hover:bg-neutral-200/60 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#133A2E] shrink-0 cursor-pointer"
             aria-label="Close dialog"
           >
             <X className="w-5 h-5 sm:w-6 sm:h-6" />

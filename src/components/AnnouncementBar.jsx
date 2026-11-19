@@ -44,11 +44,11 @@ export default function AnnouncementBar() {
             className="flex items-center"
           >
             <div className="inline-flex items-center gap-2 px-4 sm:px-6 text-[11px] sm:text-xs font-medium whitespace-nowrap">
-              <IconComponent className="w-3.5 h-3.5 text-[#D5AA54] shrink-0" />
+              <IconComponent className="w-3.5 h-3.5 text-[#D4A338] shrink-0" />
               {item.isPhone ? (
                 <a
                   href="tel:6102585615"
-                  className="text-white/95 hover:text-[#D5AA54] font-bold transition-colors cursor-pointer"
+                  className="text-white/95 hover:text-[#D4A338] font-bold transition-colors cursor-pointer"
                 >
                   {item.text}
                 </a>
@@ -64,7 +64,7 @@ export default function AnnouncementBar() {
             </div>
 
             {/* Subtle separator bullet */}
-            <span className="text-[#D5AA54]/50 text-xs select-none">&bull;</span>
+            <span className="text-[#D4A338]/50 text-xs select-none">&bull;</span>
           </div>
         )
       })}
@@ -76,13 +76,13 @@ export default function AnnouncementBar() {
             href="http://www.facebook.com/share.php?u=http://www.wernerandsonswelldrilling.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white/85 hover:text-[#D5AA54] underline-offset-2 hover:underline transition-colors cursor-pointer"
+            className="text-white/85 hover:text-[#D4A338] underline-offset-2 hover:underline transition-colors cursor-pointer"
             aria-label="Visit Werner & Sons on Facebook"
           >
             Find Us on Facebook
           </a>
         </div>
-        <span className="text-[#D5AA54]/50 text-xs select-none">&bull;</span>
+        <span className="text-[#D4A338]/50 text-xs select-none">&bull;</span>
       </div>
     </div>
   )
@@ -90,11 +90,11 @@ export default function AnnouncementBar() {
   return (
     <aside
       aria-label="Important Company Announcements"
-      className="relative overflow-hidden w-full bg-[#173F35] text-white py-2 sm:py-2.5 border-y border-[#173F35]/50 select-none group z-20 shadow-xs"
+      className="relative overflow-hidden w-full bg-[#133A2E] text-white py-2 sm:py-2.5 border-y border-[#133A2E] select-none group z-20 shadow-xs"
     >
       {/* Edge gradient masks for soft entry and exit */}
-      <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-8 sm:w-16 bg-gradient-to-r from-[#173F35] to-transparent z-10" />
-      <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 sm:w-16 bg-gradient-to-l from-[#173F35] to-transparent z-10" />
+      <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-8 sm:w-16 bg-gradient-to-r from-[#133A2E] to-transparent z-10" />
+      <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 sm:w-16 bg-gradient-to-l from-[#133A2E] to-transparent z-10" />
 
       {/* Continuous Marquee Scrolling Track */}
       <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused] motion-reduce:[animation:none]">
