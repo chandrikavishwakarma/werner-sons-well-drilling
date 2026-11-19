@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 260" width="540" height="260" fill="none">
+  <defs>
+    <!-- Architectural Metallic Gold Gradient -->
+    <linearGradient id="cGoldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFF6D4"/>
+      <stop offset="20%" stop-color="#ECD07B"/>
+      <stop offset="55%" stop-color="#D5AA54"/>
+      <stop offset="85%" stop-color="#B38631"/>
+      <stop offset="100%" stop-color="#8F641B"/>
+    </linearGradient>
+
+    <!-- Deep Forest Green Background Gradient -->
+    <linearGradient id="cForestGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#225447"/>
+      <stop offset="45%" stop-color="#173F35"/>
+      <stop offset="100%" stop-color="#0D2620"/>
+    </linearGradient>
+
+    <!-- Aquatic Cyan Water Gradient -->
+    <linearGradient id="cCyanGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#76E7FD"/>
+      <stop offset="35%" stop-color="#3DC3DF"/>
+      <stop offset="75%" stop-color="#249BB2"/>
+      <stop offset="100%" stop-color="#147587"/>
+    </linearGradient>
+
+    <!-- Heritage Terracotta / Brick Red Gradient -->
+    <linearGradient id="cTerraGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#BF4433"/>
+      <stop offset="55%" stop-color="#983224"/>
+      <stop offset="100%" stop-color="#731F14"/>
+    </linearGradient>
+
+    <!-- Refined Drop Shadows -->
+    <filter id="cElevated" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#071914" flood-opacity="0.4"/>
+    </filter>
+
+    <filter id="cSoftGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <filter id="cTextDepth" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="#071914" flood-opacity="0.6"/>
+    </filter>
+
+    <!-- Upward Arched Path for "WERNER" -->
+    <path id="cWernerArc" d="M 75,130 Q 270,90 465,130" fill="none"/>
+  </defs>
+
+  <!-- ================= TOP EMBLEM: Derrick W + Aquifer Drop ================= -->
+  <g id="crest-emblem" filter="url(#cElevated)">
+    <!-- Medallion Shield Base -->
+    <circle cx="270" cy="46" r="38" fill="url(#cForestGrad)" stroke="url(#cGoldGrad)" stroke-width="2.8"/>
+    <circle cx="270" cy="46" r="34" fill="none" stroke="#D5AA54" stroke-width="0.75" stroke-dasharray="3 1.5" opacity="0.65"/>
+
+    <!-- Subterranean Aquifer Strata Waves -->
+    <path d="M 244 62 Q 270 69 296 62" stroke="#3DC3DF" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.75"/>
+    <path d="M 249 67 Q 270 73 291 67" stroke="#D5AA54" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.55"/>
+
+    <!-- Stylized Modern Derrick "W" Structure -->
+    <!-- Left outer mast leg -->
+    <polygon points="245,26 252,26 258,60 251,60" fill="url(#cGoldGrad)"/>
+    <!-- Right outer mast leg -->
+    <polygon points="295,26 288,26 282,60 289,60" fill="url(#cGoldGrad)"/>
+    <!-- Center chevron / drill stem forming the "W" -->
+    <polygon points="256,26 262,26 270,55 266,59" fill="url(#cGoldGrad)"/>
+    <polygon points="284,26 278,26 270,55 274,59" fill="url(#cGoldGrad)"/>
+
+    <!-- Precision Drill Bit Point -->
+    <polygon points="268,55 272,55 270,70" fill="#FFF6D4" stroke="#8F641B" stroke-width="0.5"/>
+
+    <!-- Horizontal Structural Girders -->
+    <line x1="248" y1="36" x2="292" y2="36" stroke="#8F641B" stroke-width="1.3" stroke-linecap="round"/>
+    <line x1="251" y1="47" x2="289" y2="47" stroke="#8F641B" stroke-width="1.3" stroke-linecap="round"/>
+
+    <!-- Pure Water Droplet in Center of Derrick -->
+    <g filter="url(#cSoftGlow)">
+      <path d="M 270 31 C 264 39.5, 260 45, 260 50 C 260 55.5, 264.5 60, 270 60 C 275.5 60, 280 55.5, 280 50 C 280 45, 276 39.5, 270 31 Z"
+            fill="url(#cCyanGrad)"/>
+      <!-- Specular Highlight -->
+      <path d="M 265 44 C 263.5 47, 263.5 51, 266 54 C 264.5 52.5, 264 49.5, 265 47 Z"
+            fill="#FFFFFF" opacity="0.85"/>
+      <circle cx="273.5" cy="54" r="1.1" fill="#FFFFFF" opacity="0.9"/>
+    </g>
+
+    <!-- Derrick Crown Pulley Wheel -->
+    <circle cx="270" cy="24" r="4" fill="url(#cGoldGrad)" stroke="#0D2620" stroke-width="0.8"/>
+    <circle cx="270" cy="24" r="1.3" fill="#0D2620"/>
+  </g>
+
+  <!-- ================= BRAND NAME: WERNER (Arched) ================= -->
+  <g id="brand-werner" filter="url(#cTextDepth)">
+    <!-- Backing stroke for contrast and presence -->
+    <text font-family="'Montserrat', 'Inter', -apple-system, sans-serif"
+          font-size="56"
+          font-weight="900"
+          letter-spacing="5"
+          fill="#0D2620"
+          stroke="#0D2620"
+          stroke-width="5"
+          stroke-linejoin="round">
+      <textPath href="#cWernerArc" startOffset="50%" text-anchor="middle">
+        WERNER
+      </textPath>
+    </text>
+    <!-- Solid Gold Gradient Face -->
+    <text font-family="'Montserrat', 'Inter', -apple-system, sans-serif"
+          font-size="56"
+          font-weight="900"
+          letter-spacing="5"
+          fill="url(#cGoldGrad)">
+      <textPath href="#cWernerArc" startOffset="50%" text-anchor="middle">
+        WERNER
+      </textPath>
+    </text>
+  </g>
+
+  <!-- ================= MIDDLE BADGE: & SONS ================= -->
+  <g id="badge-sons" filter="url(#cElevated)">
+    <!-- Terracotta Capsule/Pill -->
+    <rect x="200" y="152" width="140" height="32" rx="16" ry="16"
+          fill="url(#cTerraGrad)"
+          stroke="url(#cGoldGrad)"
+          stroke-width="2"/>
+    <!-- Subtle Inner Highlight Rim -->
+    <rect x="203" y="155" width="134" height="26" rx="13" ry="13"
+          fill="none"
+          stroke="#FFFFFF"
+          stroke-width="0.8"
+          opacity="0.35"/>
+    <!-- Exact Text: & SONS -->
+    <text x="270" y="174"
+          text-anchor="middle"
+          font-family="'Inter', -apple-system, sans-serif"
+          font-size="14.5"
+          font-weight="800"
+          letter-spacing="3"
+          fill="#FFFFFF">&amp; SONS</text>
+  </g>
+
+  <!-- ================= BOTTOM BANNER: WELL DRILLING ================= -->
+  <g id="banner-drilling" filter="url(#cElevated)">
+    <!-- Cyan Pill Container with Dark Spruce Contour -->
+    <rect x="75" y="196" width="390" height="44" rx="22" ry="22"
+          fill="url(#cCyanGrad)"
+          stroke="#0D2620"
+          stroke-width="2.5"/>
+    <!-- Subtle Top Edge Light Shimmer -->
+    <path d="M 100 201 L 440 201" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" opacity="0.45"/>
+    <!-- Exact Text: WELL DRILLING -->
+    <text x="270" y="226"
+          text-anchor="middle"
+          font-family="'Montserrat', 'Inter', -apple-system, sans-serif"
+          font-size="20"
+          font-weight="900"
+          letter-spacing="6"
+          fill="#0D2620">WELL DRILLING</text>
+  </g>
+</svg>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <defs>
+    <linearGradient id="iGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF0BE"/>
+      <stop offset="30%" stop-color="#E9C168"/>
+      <stop offset="70%" stop-color="#D5AA54"/>
+      <stop offset="100%" stop-color="#9E7422"/>
+    </linearGradient>
+
+    <linearGradient id="iForest" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1F4D41"/>
+      <stop offset="50%" stop-color="#173F35"/>
+      <stop offset="100%" stop-color="#0E2822"/>
+    </linearGradient>
+
+    <linearGradient id="iCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6FE3FA"/>
+      <stop offset="50%" stop-color="#38BED8"/>
+      <stop offset="100%" stop-color="#1E8DA4"/>
+    </linearGradient>
+  </defs>
+
+  <circle cx="32" cy="32" r="30" fill="url(#iForest)" stroke="url(#iGold)" stroke-width="2.5"/>
+  <circle cx="32" cy="32" r="26.5" fill="none" stroke="#D5AA54" stroke-width="0.75" stroke-dasharray="2.5 1.5" opacity="0.65"/>
+
+  <!-- Aquifer Strata Waves -->
+  <path d="M 14 44 Q 32 50 50 44" stroke="#38BED8" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.7"/>
+  <path d="M 17 48 Q 32 53 47 48" stroke="#D5AA54" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.5"/>
+
+  <!-- Derrick W Structure -->
+  <polygon points="15,17 20,17 24,42 19,42" fill="url(#iGold)"/>
+  <polygon points="49,17 44,17 40,42 45,42" fill="url(#iGold)"/>
+  <polygon points="22,17 27,17 32,38 29,41" fill="url(#iGold)"/>
+  <polygon points="42,17 37,17 32,38 35,41" fill="url(#iGold)"/>
+
+  <!-- Drill Point -->
+  <polygon points="30.5,38 33.5,38 32,49" fill="#FFF0BE" stroke="#9E7422" stroke-width="0.5"/>
+
+  <line x1="18" y1="25" x2="46" y2="25" stroke="#9E7422" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="20" y1="33" x2="44" y2="33" stroke="#9E7422" stroke-width="1.2" stroke-linecap="round"/>
+
+  <!-- Pure Water Droplet -->
+  <path d="M 32 20 C 27.5 26, 25 30, 25 34 C 25 38, 28 41, 32 41 C 36 41, 39 38, 39 34 C 39 30, 36.5 26, 32 20 Z"
+        fill="url(#iCyan)"/>
+  <path d="M 28.5 30 C 27 32, 27 35, 29.5 37" stroke="#FFFFFF" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.85"/>
+
+  <circle cx="32" cy="15" r="3" fill="url(#iGold)" stroke="#0E2822" stroke-width="0.8"/>
+</svg>

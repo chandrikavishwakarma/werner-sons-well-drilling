@@ -1,0 +1,372 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #173f35;
+  --color-primary-dark: #102f28;
+  --color-secondary: #2d6654;
+  --color-accent: #d5aa54;
+  --color-accent-hover: #c49942;
+  --color-bg-main: #f7f7f2;
+  --color-bg-sage: #eaf0e9;
+  --color-card: #ffffff;
+  --color-text-main: #252d2a;
+  --color-text-muted: #64706a;
+  --color-border-subtle: #e3e8e3;
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Merriweather', Georgia, serif;
+  --font-display: 'Montserrat', sans-serif;
+}
+
+/* Base typography & rendering */
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans);
+  color: var(--color-text-main);
+  background-color: var(--color-bg-main);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  background-color: var(--color-bg-main);
+  color: var(--color-text-main);
+  cursor: default;
+}
+
+/* Custom modern container utility */
+.container-custom {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container-custom {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-custom {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.heading-serif {
+  font-family: var(--font-serif);
+}
+
+/* Interaction and Cursor Standards */
+a, button, [role="button"], [type="button"], [type="submit"], [type="reset"] {
+  cursor: pointer;
+}
+
+input, textarea, [contenteditable="true"] {
+  cursor: text;
+}
+
+select {
+  cursor: pointer;
+}
+
+button:disabled, input:disabled, textarea:disabled, select:disabled {
+  cursor: not-allowed;
+}
+
+/* Focus visibility for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Modern Card Hover Elevation */
+.card-hover {
+  transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 250ms cubic-bezier(0.16, 1, 0.3, 1), border-color 250ms ease;
+}
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 28px -6px rgba(23, 63, 53, 0.12), 0 6px 12px -2px rgba(23, 63, 53, 0.06);
+  border-color: rgba(45, 102, 84, 0.45);
+}
+
+/* Smooth Animated Underline on Links */
+.hover-underline-animation {
+  position: relative;
+  display: inline-block;
+}
+.hover-underline-animation::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--color-accent);
+  transform-origin: bottom right;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hover-underline-animation:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Active Nav Link Indicator */
+.nav-link-active {
+  position: relative;
+  color: #173f35 !important;
+  font-weight: 600;
+}
+.nav-link-active::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(1);
+  height: 2.5px;
+  bottom: -4px;
+  left: 0;
+  background-color: #d5aa54;
+  border-radius: 2px;
+}
+
+/* Animated Keyframes */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes heroSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroZoom {
+  from {
+    transform: scale(1.05);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes modalScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Subtle Industry-Related Decorative Keyframes */
+@keyframes waterWave {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-25%); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes waterPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0.6;
+  }
+}
+
+@keyframes drillingPulse {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 0.9;
+  }
+}
+
+/* Continuous Marquee Keyframes for Announcement Bar */
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* Animation utility classes - Refined for slow, comfortable reading */
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 70s linear infinite;
+  will-change: transform;
+}
+
+@media (max-width: 1024px) {
+  .animate-marquee {
+    animation-duration: 75s;
+  }
+}
+
+@media (max-width: 640px) {
+  .animate-marquee {
+    animation-duration: 80s;
+  }
+}
+
+/* Two-Row Moving Gallery Keyframes & Classes */
+@keyframes galleryLeftToRight {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes galleryRightToLeft {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-gallery-left-to-right {
+  display: flex;
+  width: max-content;
+  animation: galleryLeftToRight 72s linear infinite;
+  will-change: transform;
+}
+
+.animate-gallery-right-to-left {
+  display: flex;
+  width: max-content;
+  animation: galleryRightToLeft 66s linear infinite;
+  will-change: transform;
+}
+
+@media (max-width: 1024px) {
+  .animate-gallery-left-to-right {
+    animation-duration: 75s;
+  }
+  .animate-gallery-right-to-left {
+    animation-duration: 70s;
+  }
+}
+
+@media (max-width: 640px) {
+  .animate-gallery-left-to-right {
+    animation-duration: 80s;
+  }
+  .animate-gallery-right-to-left {
+    animation-duration: 75s;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 250ms ease-out forwards;
+}
+
+.animate-hero-slide-up {
+  animation: heroSlideUp 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-hero-zoom {
+  animation: heroZoom 1400ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-modal-in {
+  animation: modalScaleIn 250ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-down {
+  animation: slideDown 220ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-water-wave {
+  animation: waterWave 14s ease-in-out infinite;
+}
+
+.animate-water-pulse {
+  animation: waterPulse 4s ease-in-out infinite;
+}
+
+.animate-drilling-pulse {
+  animation: drillingPulse 2.5s ease-in-out infinite;
+}
+
+/* Scroll reveal helper classes */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1), transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F7F7F2;
+}
+::-webkit-scrollbar-thumb {
+  background: #2D6654;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #173F35;
+}
