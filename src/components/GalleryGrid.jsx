@@ -87,7 +87,7 @@ export default function GalleryGrid({ photos = allMainGalleryPhotos, limit, filt
     }
   }, [activeImageIndex, displayedImages.length])
 
-  // Clean, high-quality photograph card without intrusive text overlays
+  // High-quality photograph card with smooth hover detail overlay
   const renderCard = (image, keyPrefix, isClone = false) => (
     <div
       key={`${keyPrefix}-${image.id}`}
@@ -114,6 +114,23 @@ export default function GalleryGrid({ photos = allMainGalleryPhotos, limit, filt
         loading="lazy"
         className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover/card:scale-105"
       />
+
+      {/* Hover Detail Overlay Displaying Lightbox Modal Details */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-2 sm:p-2.5 pointer-events-none text-left">
+        {image.category && (
+          <span className="text-[10px] font-mono uppercase tracking-wider text-[#FDE047]">
+            {image.category}
+          </span>
+        )}
+        <h4 className="text-xs sm:text-sm font-semibold text-white leading-tight mt-0.5 line-clamp-1">
+          {image.title}
+        </h4>
+        {image.caption && (
+          <p className="text-[11px] text-neutral-200 mt-0.5 line-clamp-2 leading-tight">
+            {image.caption}
+          </p>
+        )}
+      </div>
     </div>
   )
 

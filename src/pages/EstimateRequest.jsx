@@ -30,14 +30,14 @@ export default function EstimateRequest() {
       />
 
       {/* Main 2-Column Content */}
-      <section className="py-12 sm:py-20">
+      <section className="py-8 sm:py-12">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             {/* Left Column: Contact Information & Hours (5 Cols) */}
             <div className="lg:col-span-5 space-y-6 text-left">
               {/* Company Info Box */}
               <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6 sm:p-8 shadow-xs card-hover">
-                <h3 className="heading-serif text-2xl sm:text-3xl font-normal text-[#133A2E] mb-2">
+                <h3 className="heading-serif text-fluid-h3 font-normal text-[#133A2E] mb-2 text-balance">
                   Contact Us <span className="italic">Directly</span>
                 </h3>
                 <p className="text-sm text-[#475569] leading-relaxed mb-6">

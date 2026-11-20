@@ -27,6 +27,8 @@ html {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -36,6 +38,54 @@ body {
   background-color: var(--color-bg-main);
   color: var(--color-text-muted);
   cursor: default;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+#root {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Fluid Typography Utilities using CSS clamp() */
+.text-fluid-hero {
+  font-size: clamp(2.15rem, 5.2vw + 0.5rem, 4.25rem);
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.text-fluid-pagehero {
+  font-size: clamp(2rem, 4.2vw + 0.5rem, 3.75rem);
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+.text-fluid-h1 {
+  font-size: clamp(2rem, 3.8vw + 0.5rem, 3.5rem);
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.text-fluid-h2 {
+  font-size: clamp(1.85rem, 3vw + 0.5rem, 3rem);
+  line-height: 1.18;
+  text-wrap: balance;
+}
+
+.text-fluid-h3 {
+  font-size: clamp(1.35rem, 1.8vw + 0.5rem, 2rem);
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+.text-fluid-lead {
+  font-size: clamp(1.05rem, 0.75vw + 0.75rem, 1.25rem);
+  line-height: 1.65;
+}
+
+.text-fluid-body {
+  font-size: clamp(0.925rem, 0.35vw + 0.75rem, 1.0625rem);
+  line-height: 1.6;
 }
 
 /* Custom modern container utility */
@@ -434,17 +484,200 @@ button:disabled, input:disabled, textarea:disabled, select:disabled {
   animation: drillingPulse 2.5s ease-in-out infinite;
 }
 
-/* Scroll reveal helper classes */
+/* Magic UI Shine Border Keyframes & Utility */
+@keyframes shine {
+  0% {
+    background-position: 0% 0%;
+  }
+  25% {
+    background-position: 100% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.animate-shine {
+  animation: shine var(--duration, 12s) linear infinite;
+}
+
+.shine-border-mask {
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+/* Scroll reveal helper classes with bidirectional reverse support */
 .reveal-on-scroll {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1), transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(22px);
+  transition: opacity 550ms cubic-bezier(0.16, 1, 0.3, 1), transform 550ms cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
 .reveal-on-scroll.is-revealed {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Progressive sequential stagger classes:
+   1st: badge (0ms)
+   2nd: heading (80ms)
+   3rd: description (160ms)
+   4th: visual / cards / media (240ms - 320ms)
+   5th: buttons / cta / links (380ms - 440ms)
+*/
+.reveal-stagger-1 { transition-delay: 80ms; }
+.reveal-stagger-2 { transition-delay: 160ms; }
+.reveal-stagger-3 { transition-delay: 240ms; }
+.reveal-stagger-4 { transition-delay: 320ms; }
+.reveal-stagger-5 { transition-delay: 400ms; }
+.reveal-stagger-6 { transition-delay: 480ms; }
+
+/* Dark Green Feature Section Scoped Animations */
+.feature-icon-reveal {
+  opacity: 0;
+  transform: scale(0.85) rotate(-8deg);
+  transition: opacity 500ms cubic-bezier(0.16, 1, 0.3, 1), transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.feature-icon-reveal.is-revealed {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.feature-heading-reveal {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 550ms cubic-bezier(0.16, 1, 0.3, 1), transform 550ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.feature-heading-reveal.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.feature-desc-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 550ms cubic-bezier(0.16, 1, 0.3, 1), transform 550ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.feature-desc-reveal.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Feature block subtle hover lift */
+.feature-card-hover {
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.feature-card-hover:hover {
+  transform: translateY(-4px);
+}
+
+/* Soft gold glow on the icon on hover */
+.feature-icon-glow {
+  transition: filter 300ms ease, transform 300ms ease;
+}
+
+.group:hover .feature-icon-glow {
+  filter: drop-shadow(0 0 8px rgba(212, 163, 56, 0.7));
+}
+
+/* ==========================================================================
+   Service Areas Interactive Cards & Animations
+   ========================================================================== */
+.service-area-card {
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 320ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 320ms ease;
+  will-change: transform, box-shadow, border-color;
+}
+
+.service-area-card:hover {
+  transform: translateY(-6px) scale(1.008);
+  box-shadow: 0 16px 32px -8px rgba(19, 58, 46, 0.12), 0 6px 16px -4px rgba(19, 58, 46, 0.06);
+  border-color: rgba(212, 163, 56, 0.65);
+}
+
+.service-area-icon {
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+              filter 320ms ease;
+  will-change: transform, filter;
+}
+
+.service-area-card:hover .service-area-icon {
+  transform: translateY(-2px) scale(1.12);
+  filter: drop-shadow(0 2px 8px rgba(212, 163, 56, 0.55));
+}
+
+.service-area-divider {
+  transition: border-color 320ms ease;
+}
+
+.service-area-card:hover .service-area-divider {
+  border-color: rgba(212, 163, 56, 0.4);
+}
+
+.service-area-avail-text {
+  transition: color 320ms ease;
+}
+
+.service-area-card:hover .service-area-avail-text {
+  color: #0b5377;
+}
+
+.service-area-avail-bullet {
+  transition: color 320ms ease;
+}
+
+.service-area-card:hover .service-area-avail-bullet {
+  color: #d4a338;
+}
+
+/* Home Office & Operations Card (Dark Green) */
+.service-area-hq-card {
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 320ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 320ms ease;
+  will-change: transform, box-shadow, border-color;
+}
+
+.service-area-hq-card:hover {
+  transform: translateY(-6px) scale(1.008);
+  box-shadow: 0 18px 36px -6px rgba(19, 58, 46, 0.4), 0 8px 18px -4px rgba(19, 58, 46, 0.22);
+  border-color: rgba(212, 163, 56, 0.65);
+}
+
+.service-area-hq-phone-icon {
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+              filter 320ms ease;
+  will-change: transform, filter;
+}
+
+.service-area-hq-card:hover .service-area-hq-phone-icon {
+  transform: scale(1.14) rotate(6deg);
+  filter: drop-shadow(0 0 8px rgba(212, 163, 56, 0.6));
+}
+
+.service-area-hq-divider {
+  transition: border-color 320ms ease;
+}
+
+.service-area-hq-card:hover .service-area-hq-divider {
+  border-color: rgba(212, 163, 56, 0.45);
 }
 
 /* Respect user's motion preferences */
@@ -459,6 +692,25 @@ button:disabled, input:disabled, textarea:disabled, select:disabled {
     opacity: 1 !important;
     transform: none !important;
   }
+  .feature-icon-reveal,
+  .feature-heading-reveal,
+  .feature-desc-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .feature-card-hover:hover {
+    transform: none !important;
+  }
+  .service-area-card:hover,
+  .service-area-hq-card:hover {
+    transform: none !important;
+  }
+  .service-area-card:hover .service-area-icon,
+  .service-area-hq-card:hover .service-area-hq-phone-icon {
+    transform: none !important;
+    filter: none !important;
+  }
   .animate-char-reveal {
     animation: none !important;
     opacity: 1 !important;
@@ -471,10 +723,8 @@ button:disabled, input:disabled, textarea:disabled, select:disabled {
     transform: none !important;
     filter: none !important;
   }
-  .rotating-phrase-highlight {
-    transition: none !important;
-    transform: none !important;
-    opacity: 1 !important;
+  .animate-shine {
+    animation: none !important;
   }
 }
 

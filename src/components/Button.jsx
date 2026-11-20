@@ -46,8 +46,8 @@ export default function Button({
   }
 
   const sizes = {
-    sm: 'text-xs px-3.5 py-1.5 rounded-md gap-1.5 min-h-[34px]',
-    md: 'text-sm px-5 py-2.5 rounded-lg gap-2 min-h-[42px]',
+    sm: 'text-xs px-3.5 py-2 rounded-md gap-1.5 min-h-[44px]',
+    md: 'text-sm px-5 py-2.5 rounded-lg gap-2 min-h-[44px]',
     lg: 'text-base px-6 py-3.5 rounded-lg gap-2.5 font-semibold min-h-[48px]',
   }
 

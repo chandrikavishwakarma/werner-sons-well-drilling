@@ -135,7 +135,7 @@ export default function Header() {
   return (
     <>
       <header
-        className={`sticky top-0 z-50 w-full transition-all duration-150 ${
+        className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-150 ${
           isScrolled
             ? 'pt-2 sm:pt-3 px-3 sm:px-4 md:px-6 pointer-events-none'
             : 'pt-0 px-0 pointer-events-auto bg-transparent'
@@ -331,16 +331,16 @@ export default function Header() {
             <div className="flex items-center gap-2 md:hidden">
               <a
                 href="tel:6102585615"
-                className="flex items-center justify-center w-9 h-9 rounded-full bg-[#D4A338] text-[#133A2E] hover:bg-[#C2922B] transition-colors shadow-xs cursor-pointer active:scale-95"
+                className="flex items-center justify-center w-11 h-11 rounded-full bg-[#D4A338] text-[#133A2E] hover:bg-[#C2922B] transition-colors shadow-xs cursor-pointer active:scale-95 min-h-[44px] min-w-[44px]"
                 aria-label="Call (610) 258-5615"
               >
-                <Phone className="w-4 h-4" />
+                <Phone className="w-5 h-5" />
               </a>
 
               <button
                 type="button"
                 onClick={toggleMobileMenu}
-                className="flex items-center justify-center w-9 h-9 rounded-lg border border-[#E2E8F0] text-[#133A2E] hover:bg-neutral-100/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#133A2E] cursor-pointer active:scale-95 transition-all duration-150"
+                className="flex items-center justify-center w-11 h-11 rounded-lg border border-[#E2E8F0] text-[#133A2E] hover:bg-neutral-100/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#133A2E] cursor-pointer active:scale-95 transition-all duration-150 min-h-[44px] min-w-[44px]"
                 aria-expanded={mobileMenuOpen}
                 aria-label="Toggle navigation menu"
               >
@@ -359,7 +359,7 @@ export default function Header() {
                 <Link
                   to="/"
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`block px-3.5 py-2.5 rounded-lg text-[15px] transition-colors cursor-pointer ${
+                  className={`flex items-center px-4 py-3 min-h-[44px] rounded-lg text-base transition-colors cursor-pointer ${
                     location.pathname === '/'
                       ? 'text-[#133A2E] font-bold bg-[#133A2E]/10'
                       : 'text-[#133A2E] font-semibold hover:bg-[#133A2E]/5 hover:text-[#0B241C]'
@@ -372,7 +372,7 @@ export default function Header() {
                 <Link
                   to="/gallery"
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`block px-3.5 py-2.5 rounded-lg text-[15px] transition-colors cursor-pointer ${
+                  className={`flex items-center px-4 py-3 min-h-[44px] rounded-lg text-base transition-colors cursor-pointer ${
                     location.pathname === '/gallery'
                       ? 'text-[#133A2E] font-bold bg-[#133A2E]/10'
                       : 'text-[#133A2E] font-semibold hover:bg-[#133A2E]/5 hover:text-[#0B241C]'
@@ -386,7 +386,7 @@ export default function Header() {
                   <button
                     type="button"
                     onClick={() => setMobileServicesOpen((prev) => !prev)}
-                    className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-lg text-[15px] transition-colors cursor-pointer ${
+                    className={`w-full flex items-center justify-between px-4 py-3 min-h-[44px] rounded-lg text-base transition-colors cursor-pointer ${
                       isServicesActive
                         ? 'text-[#133A2E] font-bold bg-[#133A2E]/10'
                         : 'text-[#133A2E] font-semibold hover:bg-[#133A2E]/5 hover:text-[#0B241C]'
@@ -412,7 +412,7 @@ export default function Header() {
                             key={service.path}
                             to={service.path}
                             onClick={() => setMobileMenuOpen(false)}
-                            className={`flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-colors cursor-pointer ${
+                            className={`flex items-center justify-between px-3.5 py-2.5 min-h-[44px] rounded-lg text-sm transition-colors cursor-pointer ${
                               isCurrent
                                 ? 'bg-[#133A2E]/15 text-[#133A2E] font-bold'
                                 : 'text-[#475569] font-medium hover:bg-[#133A2E]/5 hover:text-[#133A2E]'
@@ -435,7 +435,7 @@ export default function Header() {
                   <Link
                     to="/estimate-request"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="relative z-10 w-full inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-[11px] text-[15px] font-bold bg-[#D4A338] text-[#133A2E] hover:bg-[#C2922B] transition-colors cursor-pointer"
+                    className="relative z-10 w-full inline-flex items-center justify-center gap-1.5 px-4 py-3 min-h-[44px] rounded-[11px] text-base font-bold bg-[#D4A338] text-[#133A2E] hover:bg-[#C2922B] transition-colors cursor-pointer"
                   >
                     <span>Estimate Request</span>
                     <ChevronRight className="w-4 h-4 text-[#133A2E]" />

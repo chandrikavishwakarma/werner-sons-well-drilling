@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { X } from 'lucide-react'
+import ShineBorder from './ShineBorder'
 
 /**
  * Modern, Fully Responsive Modal Dialog Component (2026 Standards)
@@ -72,6 +73,8 @@ export default function Modal({
         onClick={(e) => e.stopPropagation()}
         className={`relative w-full ${maxWidth} max-h-[90dvh] flex flex-col bg-white rounded-2xl shadow-2xl border border-[#E2E8F0] overflow-hidden animate-modal-in focus:outline-none`}
       >
+        <ShineBorder shineColor={["#133A2E", "#D4A338", "#FDE047"]} borderWidth={2} />
+
         {/* Modal Header */}
         <div className="flex items-start justify-between p-5 sm:p-6 border-b border-[#E2E8F0] bg-[#F8FAFC] shrink-0">
           <div className="pr-6 text-left">

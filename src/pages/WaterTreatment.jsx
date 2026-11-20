@@ -34,26 +34,26 @@ export default function WaterTreatment() {
       />
 
       {/* Main Content & Sidebar Grid */}
-      <section className="py-12 sm:py-20">
+      <section className="py-8 sm:py-12">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             {/* Main Column (8 Cols) */}
             <div className="lg:col-span-8 bg-white rounded-2xl border border-[#E2E8F0] p-6 sm:p-10 shadow-xs space-y-8 text-left">
               <div>
-                <h2 className="heading-serif text-3xl sm:text-4xl font-normal text-[#133A2E] mb-3">
+                <h2 className="heading-serif text-fluid-h2 font-normal text-[#133A2E] mb-3 text-balance">
                   Water Purification <span className="italic">Systems</span>
                 </h2>
-                <p className="text-base sm:text-lg text-[#475569] leading-relaxed">
+                <p className="text-fluid-lead text-[#475569] leading-relaxed">
                   Does your water taste bad, smell like sulfur, or leave orange stains on your fixtures? <strong className="text-[#133A2E]">Werner &amp; Sons Well Drilling LLC</strong> works on all internal water purification systems. Enjoy great-tasting, clean water again when we install a customized new treatment system in your home or business.
                 </p>
-                <p className="text-base sm:text-lg text-[#475569] leading-relaxed mt-3">
+                <p className="text-fluid-lead text-[#475569] leading-relaxed mt-3">
                   Best of all, our professional team provides fast, friendly, and affordable services. We install industry-standard <strong className="text-[#133A2E]">ATS&reg; water purification systems</strong> designed to make your water both healthier to drink and gentle on household plumbing and appliances.
                 </p>
               </div>
 
               {/* Water Problems Solved */}
               <div className="border-t border-[#E2E8F0] pt-6">
-                <h3 className="heading-serif text-2xl sm:text-3xl font-normal text-[#133A2E] mb-3">
+                <h3 className="heading-serif text-fluid-h3 font-normal text-[#133A2E] mb-3 text-balance">
                   Common Well Water Issues We Solve
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

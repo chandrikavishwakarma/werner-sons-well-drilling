@@ -1,8 +1,10 @@
 import { useMemo } from 'react'
+import DotPattern from './DotPattern'
 
 export default function PageHero({
   badgeText = 'Specialized Cable Tool Drilling',
   title = 'Water Well Drilling in Easton, Pennsylvania',
+  highlightText,
   description = "Don't get flooded with high water bills. Our family-owned company in Easton, Pennsylvania provides affordable, sustainable water well drilling services designed for longevity and pristine water quality.",
   highlights = [
     '50+ Years Cable Tool Experience',
@@ -15,25 +17,63 @@ export default function PageHero({
   const wordsWithChars = useMemo(() => {
     if (!isStringTitle) return null
     let globalIndex = 0
-    return title.split(' ').map((word) => ({
-      word,
-      chars: word.split('').map((char) => ({
-        char,
-        index: globalIndex++,
-      })),
-    }))
-  }, [title, isStringTitle])
+    const rawWords = title.split(' ')
+    const totalWords = rawWords.length
+
+    return rawWords.map((word, wordIndex) => {
+      // Determine if word is highlighted in rich warm gold (#B88414)
+      let isGold = false
+      if (highlightText) {
+        const cleanWord = word.replace(/[^a-zA-Z0-9&]/g, '').toLowerCase()
+        const cleanHighlight = highlightText.toLowerCase()
+        isGold = cleanHighlight.includes(cleanWord)
+      } else {
+        const cleanWord = word.replace(/[^a-zA-Z0-9&]/g, '')
+        if (cleanWord === 'Easton' || cleanWord === 'Pennsylvania') {
+          isGold = true
+        } else if (word === '&' && wordIndex >= totalWords - 2) {
+          isGold = true
+        } else if (cleanWord === 'Installation' || cleanWord === 'Gallery' || cleanWord === 'Estimate') {
+          isGold = true
+        } else if (totalWords > 2 && wordIndex >= totalWords - 2) {
+          isGold = true
+        }
+      }
+
+      const isItalic = isGold
+
+      return {
+        word,
+        isGold,
+        isItalic,
+        chars: word.split('').map((char) => ({
+          char,
+          index: globalIndex++,
+        })),
+      }
+    })
+  }, [title, isStringTitle, highlightText])
 
   return (
     <section
       aria-label={`${title} Hero Banner`}
-      className="relative bg-[#F8FAFC] text-[#133A2E] pt-8 pb-10 sm:pt-10 sm:pb-14 lg:pt-11 lg:pb-14 border-b border-[#E2E8F0] overflow-hidden"
+      className="relative bg-[#F8FAFC] text-[#133A2E] pt-6 pb-8 sm:pt-8 sm:pb-10 lg:pt-9 lg:pb-11 border-b border-[#E2E8F0] overflow-hidden"
     >
+      {/* Magic UI DotPattern Background with Soft Radial Fade Mask */}
+      <DotPattern
+        width={20}
+        height={20}
+        cx={1.5}
+        cy={1.5}
+        cr={1.25}
+        className="fill-[#133A2E]/20 [mask-image:radial-gradient(450px_circle_at_center,white,transparent)] [-webkit-mask-image:radial-gradient(450px_circle_at_center,white,transparent)] sm:[mask-image:radial-gradient(650px_circle_at_center,white,transparent)] sm:[-webkit-mask-image:radial-gradient(650px_circle_at_center,white,transparent)]"
+      />
+
       <div className="container-custom relative z-10">
         <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
           {/* Top Eyebrow Badge (Centered) */}
           {badgeText && (
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-medium uppercase tracking-widest bg-[#133A2E]/10 text-[#133A2E] border border-[#133A2E]/20 shadow-2xs mb-5 animate-hero-slide-up [animation-delay:100ms]">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-medium uppercase tracking-widest bg-[#133A2E]/10 text-[#133A2E] border border-[#133A2E]/20 shadow-2xs mb-3 sm:mb-4 animate-hero-slide-up [animation-delay:100ms]">
               <span className="w-1.5 h-1.5 rounded-full bg-[#133A2E] animate-pulse" />
               <span>{badgeText}</span>
             </div>
@@ -42,13 +82,17 @@ export default function PageHero({
           {/* Main Page Headline (Centered) */}
           <h1
             aria-label={isStringTitle ? title : undefined}
-            className="heading-serif text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-normal tracking-tight text-[#133A2E] leading-[1.1] mb-5 max-w-3xl text-center text-balance"
+            className="heading-serif text-fluid-pagehero font-normal tracking-tight text-[#133A2E] mb-3 sm:mb-4 max-w-3xl text-center text-balance"
           >
             {wordsWithChars ? (
               <span aria-hidden="true">
-                {wordsWithChars.map(({ chars }, wordIndex) => (
+                {wordsWithChars.map(({ isGold, isItalic, chars }, wordIndex) => (
                   <span key={wordIndex}>
-                    <span className="inline-block whitespace-nowrap">
+                    <span
+                      className={`inline-block whitespace-nowrap ${
+                        isGold ? 'text-[#B88414]' : 'text-[#133A2E]'
+                      } ${isItalic ? 'italic' : ''}`}
+                    >
                       {chars.map(({ char, index }) => (
                         <span
                           key={index}
@@ -69,7 +113,7 @@ export default function PageHero({
           </h1>
 
           {/* Supporting Description (Centered) */}
-          <p className="text-base sm:text-lg lg:text-xl text-[#475569] leading-relaxed font-normal mb-8 max-w-2xl sm:max-w-3xl text-center animate-hero-slide-up [animation-delay:300ms]">
+          <p className="text-fluid-lead text-[#475569] leading-relaxed font-normal mb-5 sm:mb-6 max-w-2xl sm:max-w-3xl text-center animate-hero-slide-up [animation-delay:300ms]">
             {description}
           </p>
 

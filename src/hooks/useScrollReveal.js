@@ -2,13 +2,17 @@ import { useEffect, useRef, useState } from 'react'
 
 /**
  * Custom hook for smooth scroll-triggered reveal animations using IntersectionObserver.
- * Adheres to Section 2:
- * - Uses IntersectionObserver for scroll-triggered animations.
- * - Animate only when elements enter the viewport.
- * - Graceful fallback: Avoid hiding important content if JavaScript is delayed or IntersectionObserver is unsupported.
+ * Supports bidirectional scrolling:
+ * - When scrolling DOWN: elements reveal progressively as they enter the viewport.
+ * - When scrolling UP: elements smoothly hide when leaving the viewport, and re-reveal progressively when scrolled into again.
+ * - Deadband rootMargin and threshold eliminate boundary jitter/flicker.
  */
 export function useScrollReveal(options = {}) {
-  const { threshold = 0.12, rootMargin = '0px 0px -40px 0px', triggerOnce = true } = options
+  const {
+    threshold = 0.08,
+    rootMargin = '40px 0px -40px 0px',
+    triggerOnce = false,
+  } = options
   const domRef = useRef(null)
   const [isRevealed, setIsRevealed] = useState(() => {
     // Graceful fallback for older environments or SSR

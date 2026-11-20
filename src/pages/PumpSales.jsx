@@ -35,26 +35,26 @@ export default function PumpSales() {
       />
 
       {/* Main Content & Sidebar Grid */}
-      <section className="py-12 sm:py-20">
+      <section className="py-8 sm:py-12">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             {/* Main Column (8 Cols) */}
             <div className="lg:col-span-8 bg-white rounded-2xl border border-[#E2E8F0] p-6 sm:p-10 shadow-xs space-y-8 text-left">
               <div>
-                <h2 className="heading-serif text-3xl sm:text-4xl font-normal text-[#133A2E] mb-3">
+                <h2 className="heading-serif text-fluid-h2 font-normal text-[#133A2E] mb-3 text-balance">
                   Submersible Pump Sales &amp; <span className="italic">Replacement</span>
                 </h2>
-                <p className="text-base sm:text-lg text-[#475569] leading-relaxed">
+                <p className="text-fluid-lead text-[#475569] leading-relaxed">
                   <strong className="text-[#133A2E]">Werner &amp; Sons Well Drilling LLC</strong> provides sales and service for all residential, commercial, and agricultural water pump systems. You can call us anytime your pump stops working or fails to maintain adequate water pressure.
                 </p>
-                <p className="text-base sm:text-lg text-[#475569] leading-relaxed mt-3">
+                <p className="text-fluid-lead text-[#475569] leading-relaxed mt-3">
                   We specialize in the installation and replacement of <strong className="text-[#133A2E]">J Class submersible pumps</strong>. Engineered for continuous deep-well service, high energy efficiency, and rugged durability, J-Class pumps provide dependable, smooth flow even in challenging groundwater conditions.
                 </p>
               </div>
 
               {/* Complete Pump Diagnostics & Service */}
               <div className="border-t border-[#E2E8F0] pt-6">
-                <h3 className="heading-serif text-2xl sm:text-3xl font-normal text-[#133A2E] mb-3">
+                <h3 className="heading-serif text-fluid-h3 font-normal text-[#133A2E] mb-3 text-balance">
                   Common Pump Issues We Fix Quickly
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react'
 import Button from './Button'
+import ShineBorder from './ShineBorder'
 
 export default function EstimateForm({ compact = false, onSuccess }) {
   const [formData, setFormData] = useState({
@@ -91,7 +92,8 @@ export default function EstimateForm({ compact = false, onSuccess }) {
 
   if (submitted) {
     return (
-      <div className="bg-white rounded-2xl border border-[#0284C7]/30 p-6 sm:p-8 shadow-sm text-left animate-fade-in">
+      <div className="relative bg-white rounded-2xl border border-[#0284C7]/30 p-6 sm:p-8 shadow-sm text-left animate-fade-in overflow-hidden">
+        <ShineBorder shineColor={["#133A2E", "#D4A338", "#FDE047"]} borderWidth={2} />
         <div className="flex items-center gap-3 text-[#133A2E] mb-4">
           <div className="w-10 h-10 rounded-full bg-[#133A2E]/10 flex items-center justify-center shrink-0">
             <CheckCircle2 className="w-6 h-6 text-[#0284C7]" />
@@ -140,8 +142,9 @@ export default function EstimateForm({ compact = false, onSuccess }) {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="bg-white rounded-2xl border border-[#E2E8F0] p-5 sm:p-8 shadow-xs text-left"
+      className="relative bg-white rounded-2xl border border-[#E2E8F0] p-5 sm:p-8 shadow-xs text-left overflow-hidden"
     >
+      <ShineBorder shineColor={["#133A2E", "#D4A338", "#FDE047"]} borderWidth={2} />
       {!compact && (
         <div className="mb-6">
           <h3 className="heading-serif text-2xl sm:text-3xl font-normal text-[#133A2E]">

@@ -35,23 +35,23 @@ export default function WellDrilling() {
       />
 
       {/* Main Content & Sidebar Grid */}
-      <section className="py-12 sm:py-20">
+      <section className="py-8 sm:py-12">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             {/* Main Content Area (8 Cols) */}
             <div className="lg:col-span-8 bg-white rounded-2xl border border-[#E2E8F0] p-6 sm:p-10 shadow-xs space-y-8 text-left">
               <div>
-                <h2 className="heading-serif text-3xl sm:text-4xl font-normal text-[#133A2E] mb-3">
+                <h2 className="heading-serif text-fluid-h2 font-normal text-[#133A2E] mb-3 text-balance">
                   Well Water <span className="italic">Drilling Services</span>
                 </h2>
-                <p className="text-base sm:text-lg text-[#475569] leading-relaxed">
+                <p className="text-fluid-lead text-[#475569] leading-relaxed">
                   <strong className="text-[#133A2E]">Werner &amp; Sons Well Drilling LLC</strong> offers well drilling services for all types of water wells. Our team specializes in an effective, time-honored well drilling technique: <em>cable tool drilling</em>. Whether you are building a new home, upgrading an agricultural supply, or developing a commercial facility, we drill deep and clean.
                 </p>
               </div>
 
               {/* Cable Tool Method Deep Dive */}
               <div className="border-t border-[#E2E8F0] pt-6">
-                <h3 className="heading-serif text-2xl sm:text-3xl font-normal text-[#133A2E] mb-3">
+                <h3 className="heading-serif text-fluid-h3 font-normal text-[#133A2E] mb-3 text-balance">
                   Why Go with the <span className="italic">Cable Tool Method?</span>
                 </h3>
                 <div className="space-y-4 text-base text-[#475569] leading-relaxed">

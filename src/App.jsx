@@ -30,7 +30,7 @@ export default function App() {
       <div className="min-h-screen flex flex-col bg-[#F8FAFC] text-[#475569] selection:bg-[#D4A338]/30 selection:text-[#133A2E]">
         <Header />
 
-        <main className="flex-1">
+        <main className="flex-1 pt-[64px] sm:pt-[70px] lg:pt-[76px]">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/well-drilling" element={<WellDrilling />} />

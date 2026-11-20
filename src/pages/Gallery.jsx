@@ -50,7 +50,7 @@ export default function Gallery() {
       />
 
       {/* Main Gallery Section */}
-      <section className="py-12 sm:py-20">
+      <section className="py-8 sm:py-12">
         <div className="container-custom">
           {/* Category Filter Pills */}
           <div className="flex flex-wrap items-center justify-center gap-2.5 mb-6">
